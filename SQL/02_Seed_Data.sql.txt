@@ -1,0 +1,56 @@
+
+
+SET IDENTITY_INSERT [UserProfile] ON
+INSERT INTO [UserProfile]
+  ([Id], [FireBaseUserId], [FirstName], [LastName], [Email], [DateOfBirth])
+VALUES 
+  (1, 'OAwyCH7Ef0M4rmGpcIBD6IZG6pV2', 'Preston', 'Shotts', 'preston@bar.com', '1997-03-15'),
+  (2, 'bSoVWsmwNuOCPlACzxX3T6UQs722', 'Little', 'Shotts', 'little@bar.com', '2010-04-12'),
+  (3, 'fTTVpnEOLsULOGu59c4dG9mLMPg1', 'baby', 'Shotts', 'baby@bar.com', '2014-03-15'),
+  (4, 'mCGKMPBwZ5VPzL5luRfYKRtkXIF3', 'kid', 'Shotts', 'kid@bar.com', '2005-05-25'),
+  (5, 'RDHETO3PaqgblRtDH8jL2xkMsSq2', 'big', 'Shotts', 'big@bar.com', '1970-03-15'),
+  (6, 'Xm6miJP2Bdci7ejdpG4vcrbk4JY2', 'old', 'Shotts', 'old@bar.com', '1965-03-15'),
+  (7, '8QYAiX1miyfj3bcPXsoChoACBHb2', 'otherpreston', 'Shotts', 'otherpreston@bar.com', '1998-03-15')
+
+
+SET IDENTITY_INSERT [UserProfile] OFF
+  
+
+SET IDENTITY_INSERT [ParentChildRelationship] ON
+INSERT INTO [ParentChildRelationship]
+  ([Id], [ParentId], [ChildId])
+VALUES
+  (1, 1, 3), 
+  (2, 1, 2), 
+  (3, 1, 4), 
+  (4, 5, 1), 
+  (5, 6, 1),
+  (6, 7, 2),
+  (7, 7, 3), 
+  (8, 7, 4)
+
+SET IDENTITY_INSERT [ParentChildRelationship] OFF
+
+
+SET IDENTITY_INSERT [Post] ON
+INSERT INTO [Post]
+  ([Id], [Title], [TextContent], [MediaUrl], [DateTimeCreated], [DateTimeToPost], [ParentChildRelId])
+VALUES
+	(1, 'First Steps!', 'today you took your first steps, dont trip punk!', 'http://justmaggie.com/images/11_04_15_Photos/babys-first-year-photographer-12.jpg', '2021-06-15', '2021-06-15', 1),
+	(2, 'You crazy', 'why are you picking your nose kid?', 'http://justmaggie.com/images/11_04_15_Photos/babys-first-year-photographer-12.jpg', '2021-06-15', '2021-06-16', 2),
+	(3, 'playing with legos', 'you made an airplane!', 'http://justmaggie.com/images/11_04_15_Photos/babys-first-year-photographer-12.jpg', '2021-06-15', '2021-06-17', 3),
+	(4, 'playing xbox', 'you lose, punk!', 'http://justmaggie.com/images/11_04_15_Photos/babys-first-year-photographer-12.jpg', '2021-06-15', '2021-06-18', 4),
+	(5, 'Making a cake!', 'dont spit in it!', 'http://justmaggie.com/images/11_04_15_Photos/babys-first-year-photographer-12.jpg', '2021-06-15', '2021-06-19', 5),
+	(6, 'wheres your shirt?', 'silly kiddo', 'http://justmaggie.com/images/11_04_15_Photos/babys-first-year-photographer-12.jpg', '2021-06-15', '2021-06-20', 6),
+	(7, 'first words', 'i cant believe your first word was poop!', 'http://justmaggie.com/images/11_04_15_Photos/babys-first-year-photographer-12.jpg', '2021-06-15', '2021-06-21', 7),
+	(8, 'first day of school', 'have fun!', 'http://justmaggie.com/images/11_04_15_Photos/babys-first-year-photographer-12.jpg', '2021-06-15', '2021-06-22', 8),
+	(9, '5th grade graduation!', 'congrats!!', 'http://justmaggie.com/images/11_04_15_Photos/babys-first-year-photographer-12.jpg', '2021-06-15', '2021-06-23', 1),
+	(10, 'makin pancakes!', 'you made a mess!', 'http://justmaggie.com/images/11_04_15_Photos/babys-first-year-photographer-12.jpg', '2021-06-15', '2021-06-24', 2),
+	(11, 'happy halloween!', 'candy!', 'http://justmaggie.com/images/11_04_15_Photos/babys-first-year-photographer-12.jpg', '2021-06-15', '2021-06-25', 3),
+	(12, 'Merry Christmas!', 'enjoy your legos!', 'http://justmaggie.com/images/11_04_15_Photos/babys-first-year-photographer-12.jpg', '2021-06-15', '2021-06-26', 4),
+	(13, '4-wheeler fun!', 'you crazy child', 'http://justmaggie.com/images/11_04_15_Photos/babys-first-year-photographer-12.jpg', '2021-06-15', '2021-06-27', 5),
+	(14, 'missing boot!', 'wheres your boot?', 'http://justmaggie.com/images/11_04_15_Photos/babys-first-year-photographer-12.jpg', '2021-06-15', '2021-06-28', 6),
+	(15, 'cute!', 'youre cute', 'http://justmaggie.com/images/11_04_15_Photos/babys-first-year-photographer-12.jpg', '2021-06-15', '2021-06-29', 7)
+
+SET IDENTITY_INSERT [Post] OFF
+
