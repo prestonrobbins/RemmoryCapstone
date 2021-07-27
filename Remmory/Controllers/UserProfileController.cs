@@ -2,7 +2,6 @@
 using System;
 using Remmory.Models;
 using Remmory.Repositories;
-using Tabloid.Models;
 
 namespace Remmory.Controllers
 {
@@ -15,22 +14,32 @@ namespace Remmory.Controllers
         {
             _userProfileRepository = userProfileRepository;
         }
+
         //[HttpGet("GetAdminUsers")]
         //public IActionResult GetAllAdminUsers()
         //{
         //    return Ok(_userProfileRepository.GetAdminUsers());
         //}
+
+    
+            [HttpGet("{id}")]
+        public IActionResult GetByUserId(int id)
+        {
+            return Ok(_userProfileRepository.GetByUserId(id));
+        }
+
+
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetUserProfile(string firebaseUserId)
         {
             return Ok(_userProfileRepository.GetByFirebaseUserId(firebaseUserId));
         }
 
-        [HttpGet("GetAllActiveUsers")]
-        public IActionResult GetAllAcviteUsers()
-        {
-            return Ok(_userProfileRepository.GetAllUserProfiles());
-        }
+        //[HttpGet("GetAllActiveUsers")]
+        //public IActionResult GetAllAcviteUsers()
+        //{
+        //    return Ok(_userProfileRepository.GetAllUserProfiles());
+        //}
 
         [HttpGet("DoesUserExist/{firebaseUserId}")]
         public IActionResult DoesUserExist(string firebaseUserId)
@@ -43,7 +52,6 @@ namespace Remmory.Controllers
             return Ok();
         }
 
-        //USED FOR ADMIN USER
         //[HttpPost]
         //public IActionResult Post(UserProfile userProfile)
         //{

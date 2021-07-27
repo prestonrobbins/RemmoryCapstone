@@ -6,6 +6,7 @@ namespace Remmory.Repositories
     public interface IUserProfileRepository
     {
         void Add(UserProfile userProfile);
+        UserProfile GetByUserId(int id);
         UserProfile GetByFirebaseUserId(string firebaseUserId);
         List<UserProfile> GetAllUserProfiles();
 

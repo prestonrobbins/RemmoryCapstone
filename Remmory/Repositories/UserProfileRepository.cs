@@ -10,7 +10,6 @@ namespace Remmory.Repositories
     {
         public UserProfileRepository(IConfiguration configuration) : base(configuration) { }
 
-
         public List<UserProfile> GetAllUserProfiles()
         {
             using (var conn = Connection)
@@ -19,12 +18,10 @@ namespace Remmory.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-               SELECT up.Id, up.FirebaseUserId, up.DisplayName, up.FirstName, up.LastName, 
-                      up.Email, up.CreateDateTime,
-                      up.ImageLocation, up.UserTypeId, up.IsDeleted
+               SELECT up.Id, up.FirebaseUserId, up.FirstName, up.LastName, 
+                      up.Email, up.DateOfBirth
                       
-                 FROM UserProfile up 
-                 WHERE IsDeleted=0
+                FROM UserProfile up 
                 ";
 
                     var reader = cmd.ExecuteReader();
@@ -36,20 +33,55 @@ namespace Remmory.Repositories
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
-                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
                             FirstName = DbUtils.GetString(reader, "FirstName"),
                             LastName = DbUtils.GetString(reader, "LastName"),
                             Email = DbUtils.GetString(reader, "Email"),
-                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
-                            ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
-                            UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
-                            IsDeleted = reader.GetBoolean(reader.GetOrdinal("IsDeleted"))
+                            DateOfBirth = DbUtils.GetDateTime(reader, "DateOfBirth")
                         });
                     }
-                    
+
+
                     reader.Close();
 
                     return UserProfiles;
+                }
+            }
+        }
+
+        public UserProfile GetByUserId(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT up.Id, Up.FireBaseUserId, up.FirstName, up.LastName, 
+                               up.Email, up.DateOfBirth
+                          FROM UserProfile up
+                         WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", id);
+
+                    UserProfile userProfile = null;
+
+                    var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        userProfile = new UserProfile()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            FirebaseUserId = DbUtils.GetString(reader, "FireBaseUserId"),
+                            FirstName = DbUtils.GetString(reader, "FirstName"),
+                            LastName = DbUtils.GetString(reader, "LastName"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            DateOfBirth = DbUtils.GetDateTime(reader, "DateOFBirth"),
+
+                        };
+                    }
+                    reader.Close();
+
+                    return userProfile;
                 }
             }
         }
@@ -62,14 +94,12 @@ namespace Remmory.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT up.Id, Up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, 
-                               up.Email, up.CreateDateTime, up.ImageLocation, up.UserTypeId,
-                               ut.Name AS UserTypeName
+                        SELECT up.Id, Up.FireBaseUserId, up.FirstName, up.LastName, 
+                               up.Email, up.DateOfBirth
                           FROM UserProfile up
-                               LEFT JOIN UserType ut on up.UserTypeId = ut.Id
-                         WHERE FirebaseUserId = @FirebaseuserId";
+                         WHERE FireBaseUserId = @FireBaseuserId";
 
-                    DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
+                    DbUtils.AddParameter(cmd, "@FireBaseUserId", firebaseUserId);
 
                     UserProfile userProfile = null;
 
@@ -79,19 +109,12 @@ namespace Remmory.Repositories
                         userProfile = new UserProfile()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
-                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                            FirebaseUserId = DbUtils.GetString(reader, "FireBaseUserId"),
                             FirstName = DbUtils.GetString(reader, "FirstName"),
                             LastName = DbUtils.GetString(reader, "LastName"),
-                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
                             Email = DbUtils.GetString(reader, "Email"),
-                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
-                            ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
-                            UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
-                            UserType = new UserType()
-                            {
-                                Id = DbUtils.GetInt(reader, "UserTypeId"),
-                                Name = DbUtils.GetString(reader, "UserTypeName"),
-                            }
+                            DateOfBirth = DbUtils.GetDateTime(reader, "DateOFBirth"),
+                            
                         };
                     }
                     reader.Close();
@@ -136,19 +159,16 @@ namespace Remmory.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
-                                                                 Email, CreateDateTime, ImageLocation, UserTypeId)
+                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, 
+                                                                 Email, DateOfBirth)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
-                                                @Email, @CreateDateTime, @ImageLocation, @UserTypeId)";
+                                        VALUES (@FirebaseUserId, @FirstName, @LastName, 
+                                                @Email, @DateOfBirth)";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
                     DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
-                    DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
                     DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
-                    DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
-                    DbUtils.AddParameter(cmd, "@ImageLocation", userProfile.ImageLocation);
-                    DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
+                    DbUtils.AddParameter(cmd, "@DateOfBirth", userProfile.DateOfBirth);
 
                     userProfile.Id = (int)cmd.ExecuteScalar();
                 }

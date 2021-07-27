@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
-namespace Tabloid.Repositories
+namespace Remmory.Repositories
 {
     public abstract class BaseRepository
     {

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Tabloid.Models
+namespace Remmory.Models
 {
     public class UserProfile
     {
@@ -31,8 +31,8 @@ namespace Tabloid.Models
         [MaxLength(255)]
         public string ImageLocation { get; set; }
 
-        [Required]
-        public bool IsDeleted { get; set; }
+        //[Required]
+        //public bool IsDeleted { get; set; }
 
         public string FullName
         {
