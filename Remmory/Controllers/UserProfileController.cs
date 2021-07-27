@@ -2,6 +2,7 @@
 using System;
 using Remmory.Models;
 using Remmory.Repositories;
+using Tabloid.Models;
 
 namespace Remmory.Controllers
 {
@@ -42,16 +43,17 @@ namespace Remmory.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        public IActionResult Post(UserProfile userProfile)
-        {
-            userProfile.CreateDateTime = DateTime.Now;
-            userProfile.UserTypeId = UserType.AUTHOR_ID;
-            _userProfileRepository.Add(userProfile);
-            return CreatedAtAction(
-                nameof(GetUserProfile),
-                new { firebaseUserId = userProfile.FirebaseUserId },
-                userProfile);
-        }
+        //USED FOR ADMIN USER
+        //[HttpPost]
+        //public IActionResult Post(UserProfile userProfile)
+        //{
+        //    userProfile.CreateDateTime = DateTime.Now;
+        //    userProfile.UserTypeId = UserType.AUTHOR_ID;
+        //    _userProfileRepository.Add(userProfile);
+        //    return CreatedAtAction(
+        //        nameof(GetUserProfile),
+        //        new { firebaseUserId = userProfile.FirebaseUserId },
+        //        userProfile);
+        //}
     }
 }
