@@ -7,6 +7,7 @@ namespace Remmory.Repositories
     {
         void Add(UserProfile userProfile);
         UserProfile GetByUserId(int id);
+        void DeleteUserById(int id);
         UserProfile GetByFirebaseUserId(string firebaseUserId);
         List<UserProfile> GetAllUserProfiles();
 

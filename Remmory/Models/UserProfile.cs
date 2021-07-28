@@ -24,12 +24,9 @@ namespace Remmory.Models
         [DataType(DataType.EmailAddress)]
         [MaxLength(255)]
         public string Email { get; set; }
-
+        [Required]
         public DateTime DateOfBirth { get; set; }
 
-        [DataType(DataType.Url)]
-        [MaxLength(255)]
-        public string ImageLocation { get; set; }
 
         //[Required]
         //public bool IsDeleted { get; set; }

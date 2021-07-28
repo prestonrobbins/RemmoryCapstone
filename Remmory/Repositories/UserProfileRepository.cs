@@ -123,6 +123,24 @@ namespace Remmory.Repositories
                 }
             }
         }
+
+
+        public void DeleteUserById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM UserProiles 
+                                        where id = @id";
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
         //public List<UserProfile> GetAdminUsers()
         //{
         //    using (var conn = Connection)
@@ -174,6 +192,8 @@ namespace Remmory.Repositories
                 }
             }
         }
+
+
 
    
         /*
