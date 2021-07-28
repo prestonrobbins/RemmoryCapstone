@@ -14,10 +14,8 @@ namespace Remmory.Models
         [Required]
         public string TextContent { get; set; }
         [Required]
-        [MaxLength(50)]
         public string MediaUrl { get; set; }
         [Required]
-        [MaxLength(255)]
         public DateTime DateTimeCreated { get; set; }
         [Required]
         public DateTime DateTimeToPost { get; set; }

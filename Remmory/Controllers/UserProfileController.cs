@@ -22,7 +22,7 @@ namespace Remmory.Controllers
         //}
 
     
-            [HttpGet("{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetByUserId(int id)
         {
             return Ok(_userProfileRepository.GetByUserId(id));

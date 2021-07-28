@@ -32,7 +32,7 @@ namespace Remmory
 
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             //services.AddTransient<IParentChildRelationshipRepository, ParentChildRelationshipRepository>();
-            //services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<IPostRepository, PostRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";

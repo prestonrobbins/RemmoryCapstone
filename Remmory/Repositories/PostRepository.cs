@@ -30,9 +30,10 @@ namespace Remmory.Repositories
                     p.ParentChildRelId
 
                     FROM Post p
+                    WHERE p.Id = @Id
                     ";
 
-                    DbUtils.AddParameter(cmd, "@id", id);
+                    DbUtils.AddParameter(cmd, "@Id", id);
 
                     var reader = cmd.ExecuteReader();
 
@@ -45,10 +46,10 @@ namespace Remmory.Repositories
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Title = DbUtils.GetString(reader, "Title"),
-                                TextContent = DbUtils.GetString(reader, "Content"),
-                                MediaUrl = DbUtils.GetString(reader, "ImageLocation"),
-                                DateTimeCreated = DbUtils.GetDateTime(reader, "CreateDateTime"),
-                                DateTimeToPost = DbUtils.GetDateTime(reader, "PublishDateTime"),
+                                TextContent = DbUtils.GetString(reader, "TextContent"),
+                                MediaUrl = DbUtils.GetString(reader, "MediaUrl"),
+                                DateTimeCreated = DbUtils.GetDateTime(reader, "DateTimeCreated"),
+                                DateTimeToPost = DbUtils.GetDateTime(reader, "DateTimeToPost"),
                                 ParentChildRelId = DbUtils.GetInt(reader, "ParentChildRelId")
 
                             };
@@ -122,6 +123,41 @@ namespace Remmory.Repositories
                     DbUtils.AddParameter(cmd, "@ChildId", childId);
                     DbUtils.AddParameter(cmd, "@ParentId", parentId);
 
+
+                    var reader = cmd.ExecuteReader();
+                    var posts = new List<Post>();
+                    while (reader.Read())
+                    {
+                        posts.Add(new Post()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Title = DbUtils.GetString(reader, "Title"),
+                            TextContent = DbUtils.GetString(reader, "TextContent"),
+                            MediaUrl = DbUtils.GetString(reader, "MediaUrl"),
+                            DateTimeCreated = DbUtils.GetDateTime(reader, "DateTimeCreated"),
+                            DateTimeToPost = DbUtils.GetDateTime(reader, "DateTimeToPost"),
+                            ParentChildRelId = DbUtils.GetInt(reader, "ParentChildRelId")
+                        });
+                    }
+                    reader.Close();
+                    return posts;
+                }
+            }
+        }
+
+        public List<Post> GetAllPosts()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+               SELECT p.Id, p.Title, p.Textcontent, p.MediaUrl, 
+                      p.DateTimeCreated, p.DateTimeToPost, p.ParentChildRelId
+                      
+                FROM Post
+                    ";
 
                     var reader = cmd.ExecuteReader();
                     var posts = new List<Post>();

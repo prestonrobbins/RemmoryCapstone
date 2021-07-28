@@ -11,6 +11,7 @@ namespace Remmory.Repositories
         UserProfile GetByFirebaseUserId(string firebaseUserId);
         List<UserProfile> GetAllUserProfiles();
 
+
         //public List<UserProfile> GetAdminUsers();
     }
 }

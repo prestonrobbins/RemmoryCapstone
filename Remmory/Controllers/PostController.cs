@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Remmory.Models;
+using Remmory.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,81 +9,52 @@ using System.Threading.Tasks;
 
 namespace Remmory.Controllers
 {
-    public class PostController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class PostController : ControllerBase
     {
-        // GET: PostController
-        public ActionResult Index()
+        private readonly IPostRepository _postRepository;
+
+        public PostController(IPostRepository postRepository)
         {
-            return View();
+            _postRepository = postRepository;
         }
 
-        // GET: PostController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet("postid/{id}")]
+        public ActionResult GetPostById(int id)
         {
-            return View();
+            return Ok(_postRepository.GetPostById(id));
         }
 
-        // GET: PostController/Create
-        public ActionResult Create()
+        [HttpGet("parentchildid/{parentId}/{childId}")]
+        public ActionResult GetAllPostsByParentIdAndChildId(int parentId, int childId)
         {
-            return View();
+            return Ok(_postRepository.GetAllPostsByParentIdAndChildId(parentId, childId));
         }
 
-        // POST: PostController/Create
+        [HttpGet("parentchildiddate/{parentId}/{childId}")]
+        public ActionResult GetAllPostsByParentIdAndChildIdAndDate(int parentId, int childId)
+        {
+            return Ok(_postRepository.GetAllPostsByParentIdAndChildIdAndDate(parentId, childId));
+        }
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult AddPost(Post post)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            post.DateTimeCreated = DateTime.Now;
+            _postRepository.AddPost(post);
+            return CreatedAtAction(nameof(GetPostById), new { id = post.Id }, post);
         }
 
-        // GET: PostController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Post post)
         {
-            return View();
-        }
-
-        // POST: PostController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
+            if (id != post.Id)
             {
-                return RedirectToAction(nameof(Index));
+                return BadRequest();
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PostController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: PostController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _postRepository.UpdatePost(post);
+            return NoContent();
         }
     }
 }
