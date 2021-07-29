@@ -6,7 +6,7 @@ using Remmory.Utils;
 
 namespace Remmory.Repositories
 {
-    public class UserProfileRepository : BaseRepository, IUserProfileRepository, IUserProfileRepository
+    public class UserProfileRepository : BaseRepository, IUserProfileRepository
     {
         public UserProfileRepository(IConfiguration configuration) : base(configuration) { }
 
@@ -22,6 +22,96 @@ namespace Remmory.Repositories
                       up.Email, up.DateOfBirth
                       
                 FROM UserProfile up 
+                ";
+
+                    var reader = cmd.ExecuteReader();
+
+                    var UserProfiles = new List<UserProfile>();
+                    while (reader.Read())
+                    {
+                        UserProfiles.Add(new UserProfile()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                            FirstName = DbUtils.GetString(reader, "FirstName"),
+                            LastName = DbUtils.GetString(reader, "LastName"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            DateOfBirth = DbUtils.GetDateTime(reader, "DateOfBirth")
+                        });
+                    }
+
+                    reader.Close();
+
+                    return UserProfiles;
+                }
+            }
+        }
+
+        public List<UserProfile> GetAllChildrenByParentId(int parentId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                SELECT 
+                    up.Id, 
+                    up.FirebaseUserId, 
+                    up.FirstName, 
+                    up.LastName, 
+                    up.Email, 
+                    up.DateOfBirth
+                      
+                FROM ParentChildRelationship pc 
+                JOIN UserProfile up ON pc.ChildId = up.Id
+                WHERE pc.ParentId = @ParentId
+                ";
+                    DbUtils.AddParameter(cmd, "@ParentId", parentId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var UserProfiles = new List<UserProfile>();
+                    while (reader.Read())
+                    {
+                        UserProfiles.Add(new UserProfile()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                            FirstName = DbUtils.GetString(reader, "FirstName"),
+                            LastName = DbUtils.GetString(reader, "LastName"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            DateOfBirth = DbUtils.GetDateTime(reader, "DateOfBirth")
+                        });
+                    }
+
+
+                    reader.Close();
+
+                    return UserProfiles;
+                }
+            }
+        }
+
+        public List<UserProfile> GetAllParentsByChildId()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                SELECT 
+                    up.Id, 
+                    up.FirebaseUserId, 
+                    up.FirstName, 
+                    up.LastName, 
+                    up.Email, 
+                    up.DateOfBirth
+                      
+                FROM ParentChildRelationship pc 
+                JOIN UserProfile up ON pc.ParentId = up.Id
+                WHERE pc.ChildId = @ChildId
                 ";
 
                     var reader = cmd.ExecuteReader();
@@ -86,7 +176,7 @@ namespace Remmory.Repositories
             }
         }
 
-        public UserProfile GetByFirebaseUserId(string firebaseUserId)
+        public UserProfile GetUserByFirebaseUserId(string firebaseUserId)
         {
             using (var conn = Connection)
             {
