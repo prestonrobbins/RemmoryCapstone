@@ -93,7 +93,7 @@ namespace Remmory.Repositories
             }
         }
 
-        public List<UserProfile> GetAllParentsByChildId()
+        public List<UserProfile> GetAllParentsByChildId(int childId)
         {
             using (var conn = Connection)
             {
@@ -113,6 +113,7 @@ namespace Remmory.Repositories
                 JOIN UserProfile up ON pc.ParentId = up.Id
                 WHERE pc.ChildId = @ChildId
                 ";
+                    DbUtils.AddParameter(cmd, "@ChildId", childId);
 
                     var reader = cmd.ExecuteReader();
 
@@ -222,7 +223,7 @@ namespace Remmory.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"DELETE FROM UserProiles 
+                    cmd.CommandText = @"DELETE FROM UserProfile 
                                         where id = @id";
                     DbUtils.AddParameter(cmd, "@id", id);
                     cmd.ExecuteNonQuery();

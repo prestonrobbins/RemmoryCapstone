@@ -25,7 +25,7 @@ namespace Remmory.Controllers
         [HttpGet("parents/{childId}")]
         public ActionResult GetAllParentsByChildId(int childId)
         {
-            return Ok(_userProfileRepository.GetAllChildrenByParentId(childId));
+            return Ok(_userProfileRepository.GetAllParentsByChildId(childId));
         }
 
         //[HttpGet("GetAdminUsers")]
@@ -35,7 +35,7 @@ namespace Remmory.Controllers
         //}
 
 
-        [HttpGet("{id}")]
+        [HttpGet("getuser/{id}")]
         public IActionResult GetByUserId(int id)
         {
             return Ok(_userProfileRepository.GetByUserId(id));

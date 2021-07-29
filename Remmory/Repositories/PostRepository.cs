@@ -188,12 +188,17 @@ namespace Remmory.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                            INSERT INTO Post (Title, TextContent, MediaUrl, DateTimeCreated, DateTimeToPost, ParentChildRelId)
+                            INSERT INTO Post (Title, 
+                                              TextContent, 
+                                              MediaUrl, 
+                                              DateTimeCreated, 
+                                              DateTimeToPost, 
+                                              ParentChildRelId)
                             OUTPUT INSERTED.ID
                             VALUES(
                                 @Title, @TextContent, @MediaUrl, @DateTimeCreated, @DateTimeToPost, @ParentChildRelId)";
 
-                    DbUtils.AddParameter(cmd, @"Title", post.Title);
+                    DbUtils.AddParameter(cmd, "@Title", post.Title);
                     DbUtils.AddParameter(cmd, "@TextContent", post.TextContent);
                     DbUtils.AddParameter(cmd, "@MediaUrl", post.MediaUrl);
                     DbUtils.AddParameter(cmd, "@DateTimeCreated", post.DateTimeCreated);
