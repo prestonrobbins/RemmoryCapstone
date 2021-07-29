@@ -156,7 +156,7 @@ namespace Remmory.Repositories
                SELECT p.Id, p.Title, p.Textcontent, p.MediaUrl, 
                       p.DateTimeCreated, p.DateTimeToPost, p.ParentChildRelId
                       
-                FROM Post
+                FROM Post p
                     ";
 
                     var reader = cmd.ExecuteReader();
@@ -179,7 +179,7 @@ namespace Remmory.Repositories
                 }
             }
         }
-
+        //NOT WORKING
         public void AddPost(Post post)
         {
             using (var conn = Connection)
@@ -188,7 +188,7 @@ namespace Remmory.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                            INSERT INTO POST (Title, TextContent, MediaUrl, DateTimeCreated, DateTimeToPost, ParentChildRelId)
+                            INSERT INTO Post (Title, TextContent, MediaUrl, DateTimeCreated, DateTimeToPost, ParentChildRelId)
                             OUTPUT INSERTED.ID
                             VALUES(
                                 @Title, @TextContent, @MediaUrl, @DateTimeCreated, @DateTimeToPost, @ParentChildRelId)";

@@ -15,13 +15,26 @@ namespace Remmory.Controllers
             _userProfileRepository = userProfileRepository;
         }
 
+        
+        [HttpGet("children/{parentId}")]
+        public ActionResult GetAllChildrenByParentId(int parentId)
+        {
+            return Ok(_userProfileRepository.GetAllChildrenByParentId(parentId));
+        }
+
+        [HttpGet("parents/{childId}")]
+        public ActionResult GetAllParentsByChildId(int childId)
+        {
+            return Ok(_userProfileRepository.GetAllChildrenByParentId(childId));
+        }
+
         //[HttpGet("GetAdminUsers")]
         //public IActionResult GetAllAdminUsers()
         //{
         //    return Ok(_userProfileRepository.GetAdminUsers());
         //}
 
-    
+
         [HttpGet("{id}")]
         public IActionResult GetByUserId(int id)
         {
@@ -35,11 +48,11 @@ namespace Remmory.Controllers
             return Ok(_userProfileRepository.GetUserByFirebaseUserId(firebaseUserId));
         }
 
-        //[HttpGet("GetAllActiveUsers")]
-        //public IActionResult GetAllAcviteUsers()
-        //{
-        //    return Ok(_userProfileRepository.GetAllUserProfiles());
-        //}
+        [HttpGet("GetAllUsers")]
+        public IActionResult GetAllUserProfiles()
+        {
+            return Ok(_userProfileRepository.GetAllUserProfiles());
+        }
 
         [HttpGet("DoesUserExist/{firebaseUserId}")]
         public IActionResult DoesUserExist(string firebaseUserId)
@@ -52,6 +65,20 @@ namespace Remmory.Controllers
             return Ok();
         }
 
+        [HttpPost]
+        public IActionResult AddUser(UserProfile user)
+        {
+            _userProfileRepository.AddUser(user);
+            return CreatedAtAction(nameof(GetByUserId), new { id = user.Id }, user);
+        }
+
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteUserById(int id)
+        {
+            _userProfileRepository.DeleteUserById(id);
+            return NoContent();
+        }
         //[HttpPost]
         //public IActionResult Post(UserProfile userProfile)
         //{

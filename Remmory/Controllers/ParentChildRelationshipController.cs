@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Remmory.Models;
+using Remmory.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,81 +9,53 @@ using System.Threading.Tasks;
 
 namespace Remmory.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class ParentChildRelationshipController : Controller
     {
-        // GET: ParentChildRelationshipController
-        public ActionResult Index()
+        private readonly IParentChildRelationshipRepository _parentChildRelationshipRepository;
+
+        public ParentChildRelationshipController(IParentChildRelationshipRepository parentChildRelationshipRepository)
         {
-            return View();
+            _parentChildRelationshipRepository = parentChildRelationshipRepository;
         }
 
-        // GET: ParentChildRelationshipController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet("relid/{id}")]
+        public ActionResult GetByParentChildRelationshipId(int id)
         {
-            return View();
+            return Ok(_parentChildRelationshipRepository.GetByParentChildRelationshipId(id));
         }
 
-        // GET: ParentChildRelationshipController/Create
-        public ActionResult Create()
+
+            [HttpGet("allrels")]
+        public ActionResult GetAllParentChildRelationships()
         {
-            return View();
+            return Ok(_parentChildRelationshipRepository.GetAllParentChildRelationships());
         }
 
-        // POST: ParentChildRelationshipController/Create
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _parentChildRelationshipRepository.Delete(id);
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, ParentChildRelationship relationship)
+        {
+            if (id != relationship.Id)
+            {
+                return BadRequest();
+            }
+            _parentChildRelationshipRepository.Update(relationship);
+            return NoContent();
+        }
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Add(ParentChildRelationship relationship)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ParentChildRelationshipController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ParentChildRelationshipController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ParentChildRelationshipController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ParentChildRelationshipController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _parentChildRelationshipRepository.Add(relationship);
+            return CreatedAtAction(nameof(GetByParentChildRelationshipId), new { id = relationship.Id }, relationship);
         }
     }
 }

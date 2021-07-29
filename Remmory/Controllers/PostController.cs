@@ -20,6 +20,12 @@ namespace Remmory.Controllers
             _postRepository = postRepository;
         }
 
+        [HttpGet]
+        public IActionResult GetAllPosts()
+        {
+            return Ok(_postRepository.GetAllPosts());
+        }
+
         [HttpGet("postid/{id}")]
         public ActionResult GetPostById(int id)
         {
@@ -47,13 +53,20 @@ namespace Remmory.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, Post post)
+        public IActionResult UpdatePost(int id, Post post)
         {
             if (id != post.Id)
             {
                 return BadRequest();
             }
             _postRepository.UpdatePost(post);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeletePostById(int id)
+        {
+            _postRepository.DeletePostById(id);
             return NoContent();
         }
     }

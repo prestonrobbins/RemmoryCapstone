@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace Remmory.Repositories
 {
-    public class ParentChildRelationshipRepository : BaseRepository, IParentChildRelationshipRepository1, IParentChildRelationshipRepository
+    public class ParentChildRelationshipRepository : BaseRepository, IParentChildRelationshipRepository
     {
         public ParentChildRelationshipRepository(IConfiguration configuration) : base(configuration) { }
-
 
         public List<ParentChildRelationship> GetAllParentChildRelationships()
         {
@@ -102,16 +101,15 @@ namespace Remmory.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        UPDATE User
-                           SET FireaseUserId = @FireBaseUserId,
-                               FirstName = @FirstName,
-                               LastName = @LastName,
-                               Email = @Email,
-                               DateOfBirth = @DateOfBirth
+                        UPDATE ParentChildRelationship
+                           SET ParentId = @ParentId,
+                               ChildId = @ChildId
                          WHERE Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@ParentId", relationship.ParentId);
                     DbUtils.AddParameter(cmd, "@ChildId", relationship.ChildId);
+                    DbUtils.AddParameter(cmd, "@Id", relationship.Id);
+
 
                     cmd.ExecuteNonQuery();
                 }
@@ -127,9 +125,9 @@ namespace Remmory.Repositories
                 {
                     cmd.CommandText = @"INSERT INTO ParentChildRelationship (ParentId, ChildId)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@Parent, @ChildId)";
-                    DbUtils.AddParameter(cmd, "@FirebaseUserId", relationship.ParentId);
-                    DbUtils.AddParameter(cmd, "@FirstName", relationship.ChildId);
+                                        VALUES (@ParentId, @ChildId)";
+                    DbUtils.AddParameter(cmd, "@ParentId", relationship.ParentId);
+                    DbUtils.AddParameter(cmd, "@ChildId", relationship.ChildId);
 
                     relationship.Id = (int)cmd.ExecuteScalar();
                 }
