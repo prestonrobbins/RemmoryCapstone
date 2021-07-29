@@ -30,9 +30,9 @@ namespace Remmory.Controllers
 
 
         [HttpGet("{firebaseUserId}")]
-        public IActionResult GetUserProfile(string firebaseUserId)
+        public IActionResult GetUserByFirebaseUserId(string firebaseUserId)
         {
-            return Ok(_userProfileRepository.GetByFirebaseUserId(firebaseUserId));
+            return Ok(_userProfileRepository.GetUserByFirebaseUserId(firebaseUserId));
         }
 
         //[HttpGet("GetAllActiveUsers")]
@@ -44,7 +44,7 @@ namespace Remmory.Controllers
         [HttpGet("DoesUserExist/{firebaseUserId}")]
         public IActionResult DoesUserExist(string firebaseUserId)
         {
-            var userProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            var userProfile = _userProfileRepository.GetUserByFirebaseUserId(firebaseUserId);
             if (userProfile == null)
             {
                 return NotFound();

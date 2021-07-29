@@ -6,7 +6,7 @@ using Remmory.Utils;
 
 namespace Remmory.Repositories
 {
-    public class UserProfileRepository : BaseRepository, IUserProfileRepository
+    public class UserProfileRepository : BaseRepository, IUserProfileRepository, IUserProfileRepository
     {
         public UserProfileRepository(IConfiguration configuration) : base(configuration) { }
 
@@ -114,7 +114,7 @@ namespace Remmory.Repositories
                             LastName = DbUtils.GetString(reader, "LastName"),
                             Email = DbUtils.GetString(reader, "Email"),
                             DateOfBirth = DbUtils.GetDateTime(reader, "DateOFBirth"),
-                            
+
                         };
                     }
                     reader.Close();
@@ -170,7 +170,37 @@ namespace Remmory.Repositories
         //        }
         //    }
         //}
-        public void Add(UserProfile userProfile)
+
+        public void UpdateUser(UserProfile user)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE User
+                           SET FireaseUserId = @FireBaseUserId,
+                               FirstName = @FirstName,
+                               LastName = @LastName,
+                               Email = @Email,
+                               DateOfBirth = @DateOfBirth
+                         WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@FireBaseUserId", user.FirebaseUserId);
+                    DbUtils.AddParameter(cmd, "@FirstName", user.FirstName);
+                    DbUtils.AddParameter(cmd, "@LastName", user.LastName);
+                    DbUtils.AddParameter(cmd, "@Email", user.Email);
+                    DbUtils.AddParameter(cmd, "@DateOfBirth", user.DateOfBirth);
+                    DbUtils.AddParameter(cmd, "@Id", user.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        public void AddUser(UserProfile userProfile)
         {
             using (var conn = Connection)
             {
@@ -195,7 +225,7 @@ namespace Remmory.Repositories
 
 
 
-   
+
         /*
         public UserProfile GetByFirebaseUserId(string firebaseUserId)
         {
