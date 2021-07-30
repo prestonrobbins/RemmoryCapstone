@@ -65,6 +65,17 @@ namespace Remmory.Controllers
             return Ok();
         }
 
+        [HttpPut("{id}")]
+        public IActionResult UpdatePost(int id, UserProfile user)
+        {
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
+            _userProfileRepository.UpdateUser(user);
+            return NoContent();
+        }
+
         [HttpPost]
         public IActionResult AddUser(UserProfile user)
         {

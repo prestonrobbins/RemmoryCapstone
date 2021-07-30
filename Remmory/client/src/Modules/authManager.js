@@ -1,6 +1,8 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 
+export const getToken = () => firebase.auth().currentUser.getIdToken();
+
 const _apiUrl = "/api/userprofile";
 
 const _doesUserExist = (firebaseUserId) => {
@@ -44,7 +46,6 @@ export const GetAdminUsers = () =>{
 
 
 
-export const getToken = () => firebase.auth().currentUser.getIdToken();
 
 
 export const login = (email, pw) => {

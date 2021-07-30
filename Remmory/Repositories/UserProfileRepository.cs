@@ -270,8 +270,8 @@ namespace Remmory.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        UPDATE User
-                           SET FireaseUserId = @FireBaseUserId,
+                        UPDATE UserProfile
+                           SET FirebaseUserId = @FireBaseUserId,
                                FirstName = @FirstName,
                                LastName = @LastName,
                                Email = @Email,

@@ -8,11 +8,10 @@ export const NavBar = () => {
     <>
       <div className="navElement">
         <div id="headerTop">
+            <div ClassName = "logo">
+            </div>
           <div>
-            
-          </div>
-          <div>
-            <div id="appName">Checkered Blast</div>
+            <div id="appName">Remmory</div>
           </div>
           <Route>
             <Link className="nav-link" onClick={() => { sessionStorage.clear() }} to="/login">Logout</Link>
@@ -25,15 +24,21 @@ export const NavBar = () => {
                 <Route>
                   <Link className="nav-link" to="/">Home</Link>
                 </Route>
+                <div>
+                    <p>Your Parents</p>
+                </div>
+                    
                 <Route>
-                  <Link className="nav-link" to="/events">Planner</Link>
+                  <Link className="nav-link" to="/Profile">Your Profile</Link>
                 </Route>
+                <div>
+                    <p>Your Children</p>
+                </div>
+
                 <Route>
-                  <Link className="nav-link" to="/meals">Meals</Link>
+                  <Link className="nav-link" to="/AddChild">Add Child</Link>
                 </Route>
-                <Route>
-                  <Link className="nav-link" to="/recipes" >Recipes</Link>
-                </Route>
+                
                 {/* <Route>
                 <Link className="nav-link" to="/">Shopping</Link>
               </Route> */}

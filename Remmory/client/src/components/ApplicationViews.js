@@ -6,7 +6,7 @@ import Hello from "./Hello";
 
 
 
-export default function ApplicationViews({ isLoggedIn }) {
+export const ApplicationViews = ({ isLoggedIn }) => {
 
   return (
     <main>
