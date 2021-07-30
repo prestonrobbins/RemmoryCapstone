@@ -1,21 +1,21 @@
 import React from "react";
-import "./NavBar.css";
+// import "./NavBar.css";
 import { Link, Route } from "react-router-dom";
+import { ChildList } from "./ChildList"
+import { ParentList } from "./ParentList"
+
 // import "bootstrap/dist/css/bootstrap.min.css";
 
-export const NavBar = () => {
+const NavBar = () => {
   return (
     <>
       <div className="navElement">
         <div id="headerTop">
-            <div ClassName = "logo">
+            <div className = "logo">
             </div>
           <div>
             <div id="appName">Remmory</div>
           </div>
-          <Route>
-            <Link className="nav-link" onClick={() => { sessionStorage.clear() }} to="/login">Logout</Link>
-          </Route>
         </div>
         <nav className="navbar">
           <div>
@@ -27,17 +27,22 @@ export const NavBar = () => {
                 <div>
                     <p>Your Parents</p>
                 </div>
-                    
+                <div>
+                <ParentList />
+                </div>
                 <Route>
                   <Link className="nav-link" to="/Profile">Your Profile</Link>
                 </Route>
                 <div>
                     <p>Your Children</p>
                 </div>
-
+                <ChildList />
                 <Route>
                   <Link className="nav-link" to="/AddChild">Add Child</Link>
                 </Route>
+                <Route>
+            <Link className="nav-link" onClick={() => { sessionStorage.clear() }} to="/login">Logout</Link>
+          </Route>
                 
                 {/* <Route>
                 <Link className="nav-link" to="/">Shopping</Link>
@@ -49,3 +54,5 @@ export const NavBar = () => {
       </div>
     </>)
 }
+
+export default NavBar;

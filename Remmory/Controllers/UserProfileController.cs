@@ -2,6 +2,8 @@
 using System;
 using Remmory.Models;
 using Remmory.Repositories;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Remmory.Controllers
 {
@@ -15,17 +17,21 @@ namespace Remmory.Controllers
             _userProfileRepository = userProfileRepository;
         }
 
-        
-        [HttpGet("children/{parentId}")]
-        public ActionResult GetAllChildrenByParentId(int parentId)
+        [Authorize]
+        [HttpGet("children")]
+        public ActionResult GetAllChildrenByParentId()
         {
-            return Ok(_userProfileRepository.GetAllChildrenByParentId(parentId));
+            var user = GetCurrentUserProfile();
+            return Ok(_userProfileRepository.GetAllChildrenByParentId(user.Id));
         }
 
-        [HttpGet("parents/{childId}")]
-        public ActionResult GetAllParentsByChildId(int childId)
+
+        [Authorize]
+        [HttpGet("parents")]
+        public ActionResult GetAllParentsByChildId()
         {
-            return Ok(_userProfileRepository.GetAllParentsByChildId(childId));
+            var user = GetCurrentUserProfile();
+            return Ok(_userProfileRepository.GetAllParentsByChildId(user.Id));
         }
 
         //[HttpGet("GetAdminUsers")]
@@ -34,13 +40,12 @@ namespace Remmory.Controllers
         //    return Ok(_userProfileRepository.GetAdminUsers());
         //}
 
-
+        [Authorize]
         [HttpGet("getuser/{id}")]
         public IActionResult GetByUserId(int id)
         {
             return Ok(_userProfileRepository.GetByUserId(id));
         }
-
 
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetUserByFirebaseUserId(string firebaseUserId)
@@ -48,6 +53,7 @@ namespace Remmory.Controllers
             return Ok(_userProfileRepository.GetUserByFirebaseUserId(firebaseUserId));
         }
 
+        [Authorize]
         [HttpGet("GetAllUsers")]
         public IActionResult GetAllUserProfiles()
         {
@@ -64,9 +70,9 @@ namespace Remmory.Controllers
             }
             return Ok();
         }
-
+        [Authorize]
         [HttpPut("{id}")]
-        public IActionResult UpdatePost(int id, UserProfile user)
+        public IActionResult UpdateUser(int id, UserProfile user)
         {
             if (id != user.Id)
             {
@@ -76,6 +82,7 @@ namespace Remmory.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult AddUser(UserProfile user)
         {
@@ -83,12 +90,25 @@ namespace Remmory.Controllers
             return CreatedAtAction(nameof(GetByUserId), new { id = user.Id }, user);
         }
 
-
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult DeleteUserById(int id)
         {
             _userProfileRepository.DeleteUserById(id);
             return NoContent();
+        }
+
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (firebaseUserId != null)
+            {
+                return _userProfileRepository.GetUserByFirebaseUserId(firebaseUserId);
+            }
+            else
+            {
+                return null;
+            }
         }
         //[HttpPost]
         //public IActionResult Post(UserProfile userProfile)

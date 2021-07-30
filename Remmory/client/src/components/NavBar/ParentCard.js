@@ -1,8 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
-import { Button, Card, CardBody } from "reactstrap";
-import { deleteTagById, getAllTags } from "../../modules/tagManager";
-
+import { Link } from "react-router-dom";
 
 const ParentCard = ({ parent }) => {
     const history = useHistory();
@@ -11,7 +9,7 @@ const ParentCard = ({ parent }) => {
         
             <div>
                 <button>
-                <Link to={`/user/parent/${parent.id}`}>{parent.FirstName}</Link>
+                <Link to={`/user/parent/${parent.id}`}>{parent.firstName}</Link>
                 </button>
             </div>
 

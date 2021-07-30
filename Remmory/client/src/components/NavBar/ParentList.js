@@ -1,16 +1,16 @@
 
 
 import React, { useEffect, useState } from "react";
-import { getAllPosts } from "../../modules/postManager";
 import ParentCard from "./ParentCard"
 import {useHistory} from "react-router-dom";
+import { getParentsByChildId } from "../../modules/UserProfileManager"
 
-const ParentList = () => {
+export const ParentList = () => {
     const [parents, setParents] = useState([]);
     const history = useHistory();
 
     const getParents = () => {
-        getAllParents().then(parents => setParents(parents));
+        getParentsByChildId().then(parents => setParents(parents));
     };
 
     useEffect(() => {
@@ -26,10 +26,9 @@ const ParentList = () => {
                 return (
                     <ParentCard parent={parent} key={parent.id} />)
             })}
-
         </div>
         </>
     );
 }
 
-export default ParentList;
+// export default ParentList;

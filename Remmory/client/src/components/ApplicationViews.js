@@ -1,12 +1,12 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import Login from "./UserProfiles/Login";
-import Register from "./UserProfiles/Register";
+import { Login } from "./UserProfiles/Login";
+import { Register } from "./UserProfiles/Register";
 import Hello from "./Hello";
 
 
 
-export const ApplicationViews = ({ isLoggedIn }) => {
+const ApplicationViews = ({ isLoggedIn }) => {
 
   return (
     <main>
@@ -35,3 +35,5 @@ export const ApplicationViews = ({ isLoggedIn }) => {
     </main>
   );
 };
+
+export default ApplicationViews;

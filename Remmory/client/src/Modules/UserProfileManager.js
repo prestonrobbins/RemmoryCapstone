@@ -20,9 +20,9 @@ export const getAllUsers = () => {
     })
 }
 
-export const getChildrenByParentId = (id) => {
+export const getChildrenByParentId = () => {
     return getToken().then((token) => {
-        return fetch(`${_apiUrl}/Children/${id}`,
+        return fetch(`${_apiUrl}/Children`,
             {
                 method: "GET",
                 headers: {
@@ -38,9 +38,9 @@ export const getChildrenByParentId = (id) => {
     })
 }
 
-export const getParentsByChildId = (id) => {
+export const getParentsByChildId = () => {
     return getToken().then((token) => {
-        return fetch(`${_apiUrl}/Parents/${id}`,
+        return fetch(`${_apiUrl}/Parents`,
             {
                 method: "GET",
                 headers: {

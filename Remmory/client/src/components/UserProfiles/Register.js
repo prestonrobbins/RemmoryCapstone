@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import { register } from "../../modules/authManager";
 
-export default function Register() {
+export const Register = () => {
   const history = useHistory();
 
   const [firstName, setFirstName] = useState();

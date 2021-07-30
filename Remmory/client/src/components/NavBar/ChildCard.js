@@ -1,21 +1,19 @@
 import React from "react";
 import { useHistory } from "react-router";
-import { Button, Card, CardBody } from "reactstrap";
-import { deleteTagById, getAllTags } from "../../modules/tagManager";
+import { Link } from "react-router-dom";
 
-
-const ChildCard = ({ child }) => {
+export const ChildCard = ({ child }) => {
     const history = useHistory();
 
     return (
         
             <div>
                 <button>
-                <Link to={`/user/child/${child.id}`}>{child.FirstName}</Link>
+                <Link to={`/user/child/${child.id}`}>{child.firstName}</Link>
                 </button>
             </div>
 
     )
 }
 
-export default ChildCard
+// export default ChildCard
