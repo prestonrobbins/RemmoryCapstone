@@ -6,6 +6,7 @@ using Remmory.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Remmory.Controllers
@@ -16,9 +17,10 @@ namespace Remmory.Controllers
     public class PostController : ControllerBase
     {
         private readonly IPostRepository _postRepository;
-
-        public PostController(IPostRepository postRepository)
+        private readonly IUserProfileRepository _userProfileRepository;
+        public PostController(IPostRepository postRepository, IUserProfileRepository userProfileRepository)
         {
+            _userProfileRepository = userProfileRepository;
             _postRepository = postRepository;
         }
 
@@ -34,16 +36,18 @@ namespace Remmory.Controllers
             return Ok(_postRepository.GetPostById(id));
         }
 
-        [HttpGet("parentchildid/{parentId}/{childId}")]
-        public ActionResult GetAllPostsByParentIdAndChildId(int parentId, int childId)
+        [HttpGet("parentchildid/{parentId}")]
+        public ActionResult GetAllPostsByParentIdAndChildId(int parentId)
         {
-            return Ok(_postRepository.GetAllPostsByParentIdAndChildId(parentId, childId));
+            var user = GetCurrentUserProfile();
+            return Ok(_postRepository.GetAllPostsByParentIdAndChildId(parentId, user.Id));
         }
 
-        [HttpGet("parentchildiddate/{parentId}/{childId}")]
-        public ActionResult GetAllPostsByParentIdAndChildIdAndDate(int parentId, int childId)
+        [HttpGet("parentchildiddate/{childId}")]
+        public ActionResult GetAllPostsByParentIdAndChildIdAndDate(int childId)
         {
-            return Ok(_postRepository.GetAllPostsByParentIdAndChildIdAndDate(parentId, childId));
+            var user = GetCurrentUserProfile();
+            return Ok(_postRepository.GetAllPostsByParentIdAndChildIdAndDate(childId, user.Id));
         }
 
         [HttpPost]
@@ -70,6 +74,19 @@ namespace Remmory.Controllers
         {
             _postRepository.DeletePostById(id);
             return NoContent();
+        }
+
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (firebaseUserId != null)
+            {
+                return _userProfileRepository.GetUserByFirebaseUserId(firebaseUserId);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

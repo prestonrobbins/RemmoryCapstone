@@ -63,7 +63,7 @@ export const getPostsByParentChildId = (parentId, childId) => {
                 if (resp.ok) {
                     return resp.json();
                 } else {
-                    throw new Error("Failed");
+                    throw new Error("Failed: getPostsByParentChildId");
                 }
             })
     })

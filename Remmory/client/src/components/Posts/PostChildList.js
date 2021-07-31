@@ -3,17 +3,17 @@ import { getChildrenByParentId } from "../../modules/UserProfileManager";
 import { ChildCard } from "./ChildCard";
 import { useHistory } from "react-router-dom";
 
-export const ChildList = () => {
-    const [children, setChildren] = useState([]);
+export const PostList = () => {
+    const [posts, setPost] = useState([]);
     const history = useHistory();
 
-    const getChildren = () => {
+    const getPosts = () => {
         getChildrenByParentId().then(children => setChildren(children));
     };
 
 
     useEffect(() => {
-        getChildren();
+        getPosts();
     }, []);
 
     return (
