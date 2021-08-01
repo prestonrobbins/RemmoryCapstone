@@ -3,6 +3,7 @@ import React from "react";
 import { Link, Route } from "react-router-dom";
 import { PostParentList } from "./PostParentList"
 
+
 export const PostsParentView = () => {
   return (
     <>

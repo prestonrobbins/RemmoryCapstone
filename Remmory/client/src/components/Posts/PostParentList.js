@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { getPostsByParentChildId } from "../../modules/PostManager";
 import { PostParentCard } from "./PostParentCard"
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 export const PostParentList = () => {
     const [posts, setPosts] = useState([]);
     const history = useHistory();
 
+    const {id} = useParams()
     const getPosts = () => {
-        getPostsByParentChildId().then(posts => setPosts(posts));
+        getPostsByParentChildId(id).then(posts => setPosts(posts));
     };
 
 
     useEffect(() => {
         getPosts();
-    }, []);
+    }, [id]);
 
     return (
         <>

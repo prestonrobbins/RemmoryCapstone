@@ -51,9 +51,9 @@ export const getPostById = (id) => {
     })
 }
 
-export const getPostsByParentChildId = (parentId, childId) => {
+export const getPostsByParentChildId = (parentId) => {
     return getToken().then((token) => {
-        return fetch(`${_apiUrl}/Parentchildid/${parentId}/${childId}`,
+        return fetch(`${_apiUrl}/Parentchildid/${parentId}`,
             {
                 method: "GET",
                 headers: {
