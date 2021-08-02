@@ -39,7 +39,7 @@ export const getPCRByCurrentAndChildId = (childId) => {
     })
 }
 
-const CreatePCR = (PCR) => {
+export const CreatePCR = (PCR) => {
     return getToken().then((token) =>
       fetch(_apiUrl, {
         method: "POST",

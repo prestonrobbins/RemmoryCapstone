@@ -110,6 +110,18 @@ namespace Remmory.Controllers
                 return null;
             }
         }
+
+        [HttpGet("SearchForUsersByName")]
+        public IActionResult SearchForUsersByName(string q)
+        {
+            var users = _userProfileRepository.SearchForUsersByName(q);
+            if (users == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(users);
+        }
         //[HttpPost]
         //public IActionResult Post(UserProfile userProfile)
         //{

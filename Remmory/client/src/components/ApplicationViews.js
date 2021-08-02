@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { Login } from "./UserProfiles/Login";
 import { Register } from "./UserProfiles/Register";
-import { AddChild } from "./UserProfiles/AddChild"
+import { AddChildView } from "./UserProfiles/AddChildView"
 import { Posts } from "./Posts/PostsParentView"
 import { EditPost } from "./Posts/EditPost"
 import { PostCreate } from "./Posts/PostCreate"
@@ -27,10 +27,10 @@ const ApplicationViews = ({ isLoggedIn }) => {
         <Route path="/register">
           <Register />
         </Route>
-        {/* <Route path="/addchild">
-          <AddChild />
+        <Route path="/addchildview">
+          <AddChildView />
         </Route>
-        <Route path="/editprofile">
+        {/* <Route path="/editprofile">
           <EditProfile />
         </Route>
         <Route path="/editpost">

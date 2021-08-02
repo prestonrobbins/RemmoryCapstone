@@ -38,7 +38,7 @@ const NavBar = () => {
                 </div>
                 <ChildList />
                 <Route>
-                  <Link className="nav-link" to="/AddChild">Add Child</Link>
+                  <Link className="nav-link" to="/addchildview">Add Child</Link>
                 </Route>
                 <Route>
             <Link className="nav-link" onClick={() => { sessionStorage.clear() }} to="/login">Logout</Link>

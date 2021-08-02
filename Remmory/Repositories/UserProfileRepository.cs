@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using Remmory.Models;
 using Remmory.Utils;
+using Microsoft.Data.SqlClient;
 
 namespace Remmory.Repositories
 {
@@ -229,6 +230,51 @@ namespace Remmory.Repositories
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+
+        public List<UserProfile> SearchForUsersByName(string criterion)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT up.Id, Up.FireBaseUserId, up.FirstName, up.LastName, 
+                               up.Email, up.DateOfBirth
+                    From UserProfile up
+                    WHERE up.[firstName] LIKE @Criterion
+                    ORDER BY up.[firstName] DESC";
+
+                    DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");
+                    var reader = cmd.ExecuteReader();
+
+                    var expenses = new List<UserProfile>();
+
+                    while (reader.Read())
+                    {
+                        expenses.Add(NewUserProfileFromReader(reader));
+                    }
+
+                    reader.Close();
+
+                    return expenses;
+                }
+            }
+        }
+
+        private UserProfile NewUserProfileFromReader(SqlDataReader reader)
+        {
+            return new UserProfile()
+            {
+                Id = DbUtils.GetInt(reader, "Id"),
+                FirebaseUserId = DbUtils.GetString(reader, "FireBaseUserId"),
+                FirstName = DbUtils.GetString(reader, "FirstName"),
+                LastName = DbUtils.GetString(reader, "LastName"),
+                Email = DbUtils.GetString(reader, "Email"),
+                DateOfBirth = DbUtils.GetDateTime(reader, "DateOFBirth"),
+            };
         }
 
 

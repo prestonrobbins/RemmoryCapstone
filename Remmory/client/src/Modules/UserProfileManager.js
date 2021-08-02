@@ -147,6 +147,23 @@ export const deleteUserProfileById = (id) => {
     })
 }
 
+export const SearchForUsersByName = (string) => {
+    return getToken().then((token) => {
+        return fetch(_apiUrl + '/SearchForUsersByName?q=' + string, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("An unknown error occurred while trying to search users.");
+            }
+        });
+    });
+}
+
 
 
 
