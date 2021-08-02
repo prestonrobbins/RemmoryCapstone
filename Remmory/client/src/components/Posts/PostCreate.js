@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { CreatePost } from '../../modules/PostManager';
 import { getPCRByCurrentAndChildId } from '../../modules/ParentChildRelManager'
@@ -10,6 +10,7 @@ export const PostCreate = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [loading, setLoading] = useState(false)
     const [post, setPost] = useState({})
+    const [PCRel, setPCRel] = useState({})
     const history = useHistory()
 
     const uploadImage = async e => {
@@ -80,13 +81,16 @@ export const PostCreate = () => {
 //         newPost[event.target.id] = time
 //         setPost(newPost);
 // }
-const {childId} = useParams();
-const relId = getPCRByCurrentAndChildId(childId)
 
+useEffect(() => {
+    getPCRByCurrentAndChildId(childId).then(setPCRel);
+}, []);
+
+const {childId} = useParams();
 
     const handleClickSavePost = (event) => {
         dateFixer();
-        post.ParentChildRelId = relId;
+        post.ParentChildRelId = PCRel.id;
         event.preventDefault();
         setIsLoading(true);
         let newPost = { ...post };
