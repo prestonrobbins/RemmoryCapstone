@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { CreatePost } from '../../modules/PostManager';
+import { useParams } from "react-router-dom";
 import * as moment from 'moment';
 
 export const PostCreate = () => {
@@ -30,8 +31,9 @@ export const PostCreate = () => {
         setLoading(false)
 
         post.mediaUrl = file.secure_url
-
       }
+
+      
 
     //   console.log(file.secure_url)
 
@@ -77,22 +79,23 @@ export const PostCreate = () => {
 //         newPost[event.target.id] = time
 //         setPost(newPost);
 // }
+const {childId} = useParams()
 
 
 
     const handleClickSavePost = (event) => {
         dateFixer();
-        post.ParentChildRelId = 1;
+        post.ParentChildRelId = childId;
         event.preventDefault();
         setIsLoading(true);
         let newPost = { ...post };
         console.log(newPost)
-        CreatePost(newPost).then(() => history.push('/PostsParentView/5'))
+        CreatePost(newPost).then(() => history.push(`/PostsChildView/${childId}`))
     };
 
     const handleClickCancel = (event) => {
         event.preventDefault();
-        history.push('/PostsParentView/5')
+        history.push(`/PostsChildView/${childId}`)
     };
 
     return (

@@ -1,29 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { getChildrenByParentId } from "../../modules/UserProfileManager";
-import { ChildCard } from "./ChildCard";
-import { useHistory } from "react-router-dom";
+import { getPostsByParentChildId } from "../../modules/PostManager";
+import { PostChildCard } from "./PostChildCard";
+import { useHistory, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export const PostList = () => {
+export const PostChildList = () => {
     const [posts, setPost] = useState([]);
     const history = useHistory();
 
+    const {childId} = useParams()
     const getPosts = () => {
-        getChildrenByParentId().then(children => setChildren(children));
+        getPostsByParentChildId(childId).then(post => setPost(post));
     };
 
 
     useEffect(() => {
         getPosts();
-    }, []);
+    }, [childId]);
 
     return (
         <>
-            
+            <button>
+            <Link to={`/postCreate/${childId}`}>Create New Post</Link>
+            </button>
+            {console.log(posts)}
         <div>
-            {children.map((child) => {
-                console.log(child)
+            {posts.map((post) => {
+                console.log(post)
                 return (
-                    <ChildCard child={child} key={child.id} />)
+                    <PostChildCard post={post} key={post.id} />)
             })}
 
         </div>

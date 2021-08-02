@@ -51,9 +51,10 @@ export const getPostById = (id) => {
     })
 }
 
-export const getPostsByParentChildId = (parentId) => {
+export const getPostsByParentChildId = (childId) => {
+    console.log(childId)
     return getToken().then((token) => {
-        return fetch(`${_apiUrl}/Parentchildid/${parentId}`,
+        return fetch(`${_apiUrl}/Parentchildid/${childId}`,
             {
                 method: "GET",
                 headers: {
@@ -69,9 +70,10 @@ export const getPostsByParentChildId = (parentId) => {
     })
 }
 
-export const getPostsByParentChildIdDate = (parentId, childId) => {
+export const getPostsByParentChildIdDate = (childId) => {
+    console.log(childId)
     return getToken().then((token) => {
-        return fetch(`${_apiUrl}/Parentchildiddate/${parentId}/${childId}`,
+        return fetch(`${_apiUrl}/Parentchildiddate/${childId}`,
             {
                 method: "GET",
                 headers: {
@@ -81,7 +83,7 @@ export const getPostsByParentChildIdDate = (parentId, childId) => {
                 if (resp.ok) {
                     return resp.json();
                 } else {
-                    throw new Error("Failed");
+                    throw new Error("Failed: getPostsByParentChildIdDate");
                 }
             })
     })

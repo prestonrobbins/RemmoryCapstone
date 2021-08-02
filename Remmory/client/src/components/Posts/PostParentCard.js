@@ -12,9 +12,7 @@ export const PostParentCard = ({ post }) => {
                 <h3>{post.title}</h3>
                 <p>{post.textContent}</p>
 
-                {/* <button>
-                <Link to={`/PostsParentView/${child.id}`}>{child.firstName}</Link>
-                </button> */}
+                
             </div>
 
     )

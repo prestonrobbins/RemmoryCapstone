@@ -9,7 +9,7 @@ export const ChildCard = ({ child }) => {
         
             <div>
                 <button>
-                <Link to={`/user/child/${child.id}`}>{child.firstName}</Link>
+                <Link to={`/PostsChildView/${child.id}`}>{child.firstName}</Link>
                 </button>
             </div>
 

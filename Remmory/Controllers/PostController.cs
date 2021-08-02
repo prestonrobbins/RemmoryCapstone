@@ -36,18 +36,18 @@ namespace Remmory.Controllers
             return Ok(_postRepository.GetPostById(id));
         }
 
-        [HttpGet("parentchildid/{parentId}")]
-        public ActionResult GetAllPostsByParentIdAndChildId(int parentId)
+        [HttpGet("parentchildid/{childId}")]
+        public ActionResult GetAllPostsByParentIdAndChildId(int childId)
         {
             var user = GetCurrentUserProfile();
-            return Ok(_postRepository.GetAllPostsByParentIdAndChildId(parentId, user.Id));
+            return Ok(_postRepository.GetAllPostsByParentIdAndChildId(user.Id, childId));
         }
 
-        [HttpGet("parentchildiddate/{childId}")]
-        public ActionResult GetAllPostsByParentIdAndChildIdAndDate(int childId)
+        [HttpGet("Parentchildiddate/{parentId}")]
+        public ActionResult GetAllPostsByParentIdAndChildIdAndDate(int parentId)
         {
             var user = GetCurrentUserProfile();
-            return Ok(_postRepository.GetAllPostsByParentIdAndChildIdAndDate(childId, user.Id));
+            return Ok(_postRepository.GetAllPostsByParentIdAndChildIdAndDate(parentId, user.Id));
         }
 
         [HttpPost]

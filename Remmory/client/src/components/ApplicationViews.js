@@ -7,6 +7,8 @@ import { Posts } from "./Posts/PostsParentView"
 import { EditPost } from "./Posts/EditPost"
 import { PostCreate } from "./Posts/PostCreate"
 import { PostsParentView } from "./Posts/PostsParentView"
+import { PostsChildView } from "./Posts/PostsChildView"
+
 import Home from "./Home";
 
 
@@ -34,7 +36,10 @@ const ApplicationViews = ({ isLoggedIn }) => {
         <Route path="/editpost">
           <EditPost />
         </Route> */}
-        <Route path="/PostsParentView/:id(\d+)">
+        <Route path="/PostsChildView/:childId(\d+)">
+          <PostsChildView />
+        </Route>
+        <Route path="/PostsParentView/:parentId(\d+)">
           <PostsParentView />
         </Route>
         <Route path="/postCreate">
