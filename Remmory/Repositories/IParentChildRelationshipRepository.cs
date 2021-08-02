@@ -10,5 +10,8 @@ namespace Remmory.Repositories
         List<ParentChildRelationship> GetAllParentChildRelationships();
         ParentChildRelationship GetByParentChildRelationshipId(int id);
         void Update(ParentChildRelationship relationship);
+        ParentChildRelationship GetByCurrentUserAndParentId(int childId, int parentId);
+        ParentChildRelationship GetByCurrentUserAndChildId(int childId, int parentId);
+
     }
 }

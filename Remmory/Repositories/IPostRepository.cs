@@ -12,5 +12,7 @@ namespace Remmory.Repositories
         List<Post> GetAllPostsByParentIdAndChildIdAndDate(int parentId, int childId);
         Post GetPostById(int id);
         void UpdatePost(Post post);
+
+
     }
 }

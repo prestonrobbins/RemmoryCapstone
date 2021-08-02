@@ -78,6 +78,74 @@ namespace Remmory.Repositories
             }
         }
 
+        public ParentChildRelationship GetByCurrentUserAndParentId(int childId, int parentId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, ParentId, ChildId
+                          FROM ParentChildRelationship
+                          WHERE ParentId = @ParentId AND ChildId = @ChildId";
+
+                    DbUtils.AddParameter(cmd, "@ChildId", childId);
+                    DbUtils.AddParameter(cmd, "@ParentId", parentId);
+
+                    ParentChildRelationship parentChildRelationship = null;
+
+                    var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        parentChildRelationship = new ParentChildRelationship()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            ChildId = DbUtils.GetInt(reader, "ChildId"),
+                            ParentId = DbUtils.GetInt(reader, "ParentId")
+                        };
+                    }
+                    reader.Close();
+
+                    return parentChildRelationship;
+                }
+            }
+        }
+
+        public ParentChildRelationship GetByCurrentUserAndChildId(int childId, int parentId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, ParentId, ChildId
+                          FROM ParentChildRelationship
+                          WHERE ParentId = @ParentId AND ChildId = @ChildId";
+
+                    DbUtils.AddParameter(cmd, "@ChildId", childId);
+                    DbUtils.AddParameter(cmd, "@ParentId", parentId);
+
+                    ParentChildRelationship parentChildRelationship = null;
+
+                    var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        parentChildRelationship = new ParentChildRelationship()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            ChildId = DbUtils.GetInt(reader, "ChildId"),
+                            ParentId = DbUtils.GetInt(reader, "ParentId")
+                        };
+                    }
+                    reader.Close();
+
+                    return parentChildRelationship;
+                }
+            }
+        }
+
         public void Delete(int id)
         {
             using (var conn = Connection)
