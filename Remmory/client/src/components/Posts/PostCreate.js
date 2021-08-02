@@ -1,77 +1,141 @@
-// import React, { useState } from 'react';
-// import { useHistory } from 'react-router';
-// import { Form, FormGroup, Button, Label, Input, Col } from 'reactstrap';
-// import { addTransaction } from '../../modules/transactionManager';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
+import { CreatePost } from '../../modules/PostManager';
+import * as moment from 'moment';
 
-export const TransactionAddForm = () => {
-    // const [isLoading, setIsLoading] = useState(false)
-    // const [transaction, setTransaction] = useState({})
-    // const history = useHistory()
+export const PostCreate = () => {
+    const [image, setImage] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [post, setPost] = useState({})
+    const history = useHistory()
 
-    // const handleControlledInputChange = (event) => {
-    //     let newTransaction = { ...transaction }
-    //     let selectedVal = event.target.value
+    const uploadImage = async e => {
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', 'darwin')
+        setLoading(true)
+        const res = await fetch (
+          '	https://api.cloudinary.com/v1_1/drnzrvhyi/image/upload', 
+          {
+            method: 'POST',
+            body: data
+          }
+        )
+        const file = await res.json()
+    
+        setImage(file.secure_url)
+        console.log("FILE URL", file.secure_url)
+        setLoading(false)
 
-    //     if (event.target.id.includes('Id')) {
-    //         selectedVal = parseInt(selectedVal)
-    //     }
+        post.mediaUrl = file.secure_url
 
-    //     if (event.target.id.includes('price')) {
-    //         selectedVal = parseInt(selectedVal)
-    //     }
+      }
 
-    //     if (event.target.id.includes('type')) {
-    //         selectedVal = parseInt(selectedVal)
-    //     }
+    //   console.log(file.secure_url)
 
-    //     console.log(selectedVal)
-    //     newTransaction[event.target.id] = selectedVal
-    //     setTransaction(newTransaction);
+    const dateFixer = () => {
+        const date = new Date(post.dateTimeToPost);
+        const cutDate = moment(date).format("YYYY-MM-DD")
+        post.dateTimeToPost = cutDate
+    };
+
+    const dateDefaultFixer = () => {
+        const date = new Date(post.dateTimeToPost);
+        const cutDate = moment(date).format("YYYY-MM-DD")
+        post.dateTimeToPost = cutDate
+    };
+
+    // export const momentDateFixer = (property) => {
+    //     const date = new Date(property.lastService);
+    //     const cutDate = moment(date).format("YYYY-MM-DD")
+    //     return cutDate
     // };
 
-    // const handleClickSaveTransaction = (event) => {
-    //     event.preventDefault();
-    //     setIsLoading(true);
-    //     let newTransaction = { ...transaction };
-    //     console.log(newTransaction)
-    //     addTransaction(newTransaction).then(() => history.push('/Transaction'))
-    // };
+    const handleControlledInputChange = (event) => {
+        let newPost = { ...post }
+        let selectedVal = event.target.value
+        console.log(selectedVal)
+        newPost[event.target.id] = selectedVal
+        setPost(newPost);
+    };
 
-    // const handleClickCancel = (event) => {
-    //     event.preventDefault();
-    //     history.push('/Transaction')
-    // };
+//     var jsonDate = (new Date()).toJSON();
+// var backToDate = new Date(jsonDate);
+
+// console.log(jsonDate); //2015-10-26T07:46:36.611Z
+
+// const handleDateTime = (event) => {
+//     let newPost = { ...post }
+//         let selectedVal = event.target.value
+//         console.log(selectedVal)
+//         var date = selectedVal;
+// var day = date.getDate();       // yields date
+// var month = date.getMonth() + 1;    // yields month (add one as '.getMonth()' is zero indexed)
+// var year = date.getFullYear();  // yields year
+// var hour = date.getHours();     // yields hours 
+// var minute = date.getMinutes(); // yields minutes
+// var second = date.getSeconds(); // yields seconds
+
+// // After this construct a string with the above results as below
+// var time = day + "/" + month + "/" + year + " " + hour + ':' + minute + ':' + second; 
+//         newPost[event.target.id] = time
+//         setPost(newPost);
+// }
+
+
+
+    const handleClickSavePost = (event) => {
+        dateFixer();
+        post.ParentChildRelId = 1;
+        event.preventDefault();
+        setIsLoading(true);
+        let newPost = { ...post };
+        console.log(newPost)
+        CreatePost(newPost).then(() => history.push('/PostsParentView/5'))
+    };
+
+    const handleClickCancel = (event) => {
+        event.preventDefault();
+        history.push('/PostsParentView/5')
+    };
 
     return (
-        <h1>ooooo</h1>
-        // <>
-        //     <Form>
-        //         <FormGroup>
-        //             <Label for="type" sm={2}>Select Type</Label>
+        
+        <>
+            <form>
+                    {/* <label for="type" sm={2}>Select Type</label>
 
-        //             <Input type="select" name="select" id="type" value={transaction.type} onChange={handleControlledInputChange} required>
+                    <input type="select" name="select" id="type" value={transaction.type} onChange={handleControlledInputChange} required>
 
-        //                 <option value={0}>Expense</option>
-        //                 <option value={1}>Payment</option>
-        //             </Input>
+                        <option value={0}>Expense</option>
+                        <option value={1}>Payment</option>
+                    </input> */}
 
-        //         </FormGroup>
-        //         <FormGroup>
-        //             <Label for="description">Description</Label>
-        //             <Input type="text" id="description" placeholder="Description" value={transaction.description} onChange={handleControlledInputChange} />
-        //         </FormGroup>
-        //         <FormGroup>
-        //             <Label for="price">Price</Label>
-        //             <Input type="number" id="price" placeholder="Price" value={transaction.price} onChange={handleControlledInputChange} />
-        //         </FormGroup>
-        //         <FormGroup>
-        //             <Label for="date">Date</Label>
-        //             <Input type="date" id="date" value={transaction.date} onChange={handleControlledInputChange} />
-        //         </FormGroup>
-        //         <Button className="btn btn-primary" onClick={handleClickSaveTransaction}>Save Transaction</Button>
-        //         <Button className="btn btn-primary" onClick={handleClickCancel}>Cancel</Button>
-        //     </Form>
-        // </>
+                    <h1>Upload Images</h1>
+                        <input 
+                        type="file"
+                        name="file" 
+                        placeholder="Upload an Image"
+                        onChange={uploadImage}
+                        />
+                        {loading ? (
+                            <h3>Loading</h3>
+                        ): (
+                            <img src={image} style ={{width: '300px' }} />
+                        )}
+
+                    <label for="title">Title</label>
+                    <input type="text" id="title" placeholder="Title" value={post.title} onChange={handleControlledInputChange} />
+                    <label for="textContent">Description</label>
+                    <input type="text" id="textContent" placeholder="Description" value={post.textContent} onChange={handleControlledInputChange} />
+                    <label for="dateToPost">Post Date</label>
+                    <input type="date-local" id="dateTimeToPost"  format="YYYY-MM-DD" value={post.dateTimeToPost} onChange={handleControlledInputChange} />
+                <button className="btn btn-primary" onClick={handleClickSavePost}>Save Post</button>
+                <button className="btn btn-primary" onClick={handleClickCancel}>Cancel</button>
+            </form>
+        </>
     )
 
 };

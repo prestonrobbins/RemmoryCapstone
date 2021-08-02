@@ -31,14 +31,14 @@ const ApplicationViews = ({ isLoggedIn }) => {
         <Route path="/editprofile">
           <EditProfile />
         </Route>
-         <Route path="/postCreate">
-          <PostCreate />
-        </Route>
         <Route path="/editpost">
           <EditPost />
         </Route> */}
         <Route path="/PostsParentView/:id(\d+)">
           <PostsParentView />
+        </Route>
+        <Route path="/postCreate">
+          <PostCreate />
         </Route>
       </Switch>
     </main>

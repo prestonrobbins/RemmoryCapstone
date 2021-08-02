@@ -21,7 +21,7 @@ export const getAllPosts = () => {
     })
 }
 
-const CreatePost = (post) => {
+export const CreatePost = (post) => {
     return getToken().then((token) =>
       fetch(_apiUrl, {
         method: "POST",
