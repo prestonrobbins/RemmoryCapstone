@@ -41,12 +41,6 @@ export const PostCreate = () => {
         post.dateTimeToPost = cutDate
     };
 
-    const dateDefaultFixer = () => {
-        const date = new Date(post.dateTimeToPost);
-        const cutDate = moment(date).format("YYYY-MM-DD")
-        post.dateTimeToPost = cutDate
-    };
-
     // export const momentDateFixer = (property) => {
     //     const date = new Date(property.lastService);
     //     const cutDate = moment(date).format("YYYY-MM-DD")
@@ -131,7 +125,7 @@ export const PostCreate = () => {
                     <label for="textContent">Description</label>
                     <input type="text" id="textContent" placeholder="Description" value={post.textContent} onChange={handleControlledInputChange} />
                     <label for="dateToPost">Post Date</label>
-                    <input type="date-local" id="dateTimeToPost"  format="YYYY-MM-DD" value={post.dateTimeToPost} onChange={handleControlledInputChange} />
+                    <input type="date" id="dateTimeToPost"  format="YYYY-MM-DD" value={post.dateTimeToPost} onChange={handleControlledInputChange} />
                 <button className="btn btn-primary" onClick={handleClickSavePost}>Save Post</button>
                 <button className="btn btn-primary" onClick={handleClickCancel}>Cancel</button>
             </form>

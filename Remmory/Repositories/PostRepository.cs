@@ -205,7 +205,7 @@ namespace Remmory.Repositories
                     DbUtils.AddParameter(cmd, "@DateTimeToPost", post.DateTimeToPost);
                     DbUtils.AddParameter(cmd, "@ParentChildRelId", post.ParentChildRelId);
 
-                    post.Id = (int)cmd.ExecuteScalar();
+                    cmd.ExecuteScalar();
 
                 }
             }

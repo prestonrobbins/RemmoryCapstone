@@ -30,7 +30,7 @@ export const CreatePost = (post) => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(post)
-      }).then(resp => resp.json()));
+      }));
   };
 
 export const getPostById = (id) => {
