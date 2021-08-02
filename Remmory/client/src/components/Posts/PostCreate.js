@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { CreatePost } from '../../modules/PostManager';
+import { getPCRByCurrentAndChildId } from '../../modules/ParentChildRelManager'
 import { useParams } from "react-router-dom";
 import * as moment from 'moment';
 
@@ -79,13 +80,13 @@ export const PostCreate = () => {
 //         newPost[event.target.id] = time
 //         setPost(newPost);
 // }
-const {childId} = useParams()
-
+const {childId} = useParams();
+const relId = getPCRByCurrentAndChildId(childId)
 
 
     const handleClickSavePost = (event) => {
         dateFixer();
-        post.ParentChildRelId = childId;
+        post.ParentChildRelId = relId;
         event.preventDefault();
         setIsLoading(true);
         let newPost = { ...post };

@@ -21,6 +21,24 @@ export const getPCRById = (id) => {
     })
 }
 
+export const getPCRByCurrentAndChildId = (childId) => {
+    return getToken().then((token) => {
+        return fetch(`${_apiUrl}/currentandchildid/${childId}`,
+            {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            }).then(resp => {
+                if (resp.ok) {
+                    return resp.json();
+                } else {
+                    throw new Error("Failed: getPCRByCurrentAndChildId");
+                }
+            })
+    })
+}
+
 const CreatePCR = (PCR) => {
     return getToken().then((token) =>
       fetch(_apiUrl, {

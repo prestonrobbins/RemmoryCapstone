@@ -42,7 +42,7 @@ const ApplicationViews = ({ isLoggedIn }) => {
         <Route path="/PostsParentView/:parentId(\d+)">
           <PostsParentView />
         </Route>
-        <Route path="/postCreate">
+        <Route path="/postCreate/:childId(\d+)">
           <PostCreate />
         </Route>
       </Switch>
