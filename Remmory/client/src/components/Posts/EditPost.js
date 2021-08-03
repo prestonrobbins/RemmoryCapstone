@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { CreatePost } from '../../modules/PostManager';
+import { updatePost } from '../../modules/PostManager';
 import { getPCRByCurrentAndChildId } from '../../modules/ParentChildRelManager'
 import { getPostById } from "../../modules/PostManager"
 import { useParams } from "react-router-dom";
@@ -16,10 +16,11 @@ export const PostEdit = () => {
     const {postId} = useParams();
 
 const getPostToEdit = () => {
-    getPostById(postId).then(post => { setPost(post)
-        setImage(post.mediaUrl)
+    getPostById(postId).then(fetchedPost => { setPost(fetchedPost)
+        setImage(fetchedPost.mediaUrl)
     })
 }
+console.log("HERE", post)
 
 useEffect(() => {
     getPostToEdit()
@@ -72,7 +73,7 @@ useEffect(() => {
         setIsLoading(true);
         let newPost = { ...post };
         console.log(newPost)
-        CreatePost(newPost).then(() => history.push(`/`))
+        updatePost(newPost).then(() => history.push(`/`))
     };
 
     const handleClickCancel = (event) => {

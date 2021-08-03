@@ -28,7 +28,7 @@ export const PostChildList = () => {
             {posts.map((post) => {
                 console.log(post)
                 return (
-                    <PostChildCard post={post} key={post.id} />)
+                    <PostChildCard getPosts={getPosts} post={post} key={post.id} />)
             })}
 
         </div>

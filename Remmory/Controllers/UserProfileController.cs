@@ -114,7 +114,8 @@ namespace Remmory.Controllers
         [HttpGet("SearchForUsersByName")]
         public IActionResult SearchForUsersByName(string q)
         {
-            var users = _userProfileRepository.SearchForUsersByName(q);
+            var user = GetCurrentUserProfile();
+            var users = _userProfileRepository.SearchForUsersByName(q, user.Id);
             if (users == null)
             {
                 return NotFound();

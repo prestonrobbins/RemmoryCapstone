@@ -10,7 +10,7 @@ namespace Remmory.Repositories
         List<UserProfile> GetAllChildrenByParentId(int parentId);
         List<UserProfile> GetAllParentsByChildId(int childId);
         List<UserProfile> GetAllUserProfiles();
-        List<UserProfile> SearchForUsersByName(string criterion);
+        List<UserProfile> SearchForUsersByName(string criterion, int currentUserId);
         UserProfile GetByUserId(int id);
         UserProfile GetUserByFirebaseUserId(string firebaseUserId);
         void UpdateUser(UserProfile user);

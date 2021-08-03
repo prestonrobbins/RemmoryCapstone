@@ -233,7 +233,7 @@ namespace Remmory.Repositories
         }
 
 
-        public List<UserProfile> SearchForUsersByName(string criterion)
+        public List<UserProfile> SearchForUsersByName(string criterion, int currentUserId)
         {
             using (var conn = Connection)
             {
@@ -241,13 +241,17 @@ namespace Remmory.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    SELECT up.Id, Up.FireBaseUserId, up.FirstName, up.LastName, 
+                    SELECT DISTINCT up.Id, Up.FireBaseUserId, up.FirstName, up.LastName, 
                                up.Email, up.DateOfBirth
                     From UserProfile up
-                    WHERE up.[firstName] LIKE @Criterion
+                    JOIN ParentChildRelationship pc ON pc.ParentId = up.Id OR pc.ChildId = up.Id
+                    WHERE up.[firstName] LIKE @Criterion AND NOT up.Id = @currentUserId AND up.Id NOT IN (SELECT up.id From UserProfile up
+                    JOIN ParentChildRelationship pc ON pc.ParentId = up.Id OR pc.ChildId = up.Id
+                    WHERE pc.ParentId = @currentUserId OR pc.ChildId = @currentUserId )
                     ORDER BY up.[firstName] DESC";
 
                     DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");
+                    DbUtils.AddParameter(cmd, "@currentUserId", currentUserId);
                     var reader = cmd.ExecuteReader();
 
                     var expenses = new List<UserProfile>();

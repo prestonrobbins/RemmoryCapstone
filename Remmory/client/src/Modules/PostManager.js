@@ -89,16 +89,16 @@ export const getPostsByParentChildIdDate = (childId) => {
     })
 }
 
-export const updatePost = (id) => {
+export const updatePost = ( editedPost) => {
     return getToken().then((token) =>
-      fetch(`${_apiUrl}/{id}`, {
+      fetch(`${_apiUrl}/${editedPost.id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(id)
-      }).then(resp => resp.json()));
+        body: JSON.stringify(editedPost)
+      }));
   };
 
 export const deletePost = (id) => {
