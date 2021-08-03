@@ -119,7 +119,6 @@ namespace Remmory.Controllers
             {
                 return NotFound();
             }
-
             return Ok(users);
         }
         //[HttpPost]

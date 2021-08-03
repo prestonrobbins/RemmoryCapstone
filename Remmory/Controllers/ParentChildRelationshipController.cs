@@ -74,6 +74,8 @@ namespace Remmory.Controllers
         [HttpPost]
         public IActionResult Add(ParentChildRelationship relationship)
         {
+            var user = GetCurrentUserProfile();
+            relationship.ParentId = user.Id;
             _parentChildRelationshipRepository.Add(relationship);
             return CreatedAtAction(nameof(GetByParentChildRelationshipId), new { id = relationship.Id }, relationship);
         }

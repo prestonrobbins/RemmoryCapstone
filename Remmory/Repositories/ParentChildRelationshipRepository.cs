@@ -201,5 +201,23 @@ namespace Remmory.Repositories
                 }
             }
         }
+
+        public void CreatePCRelByCurrentAndChildId(ParentChildRelationship relationship)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO ParentChildRelationship (ParentId, ChildId)
+                                        OUTPUT INSERTED.ID
+                                        VALUES (@ParentId, @ChildId)";
+                    DbUtils.AddParameter(cmd, "@ParentId", relationship.ParentId);
+                    DbUtils.AddParameter(cmd, "@ChildId", relationship.ChildId);
+
+                    relationship.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
     }
 }
