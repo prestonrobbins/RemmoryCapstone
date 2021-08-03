@@ -4,7 +4,7 @@ import { Login } from "./UserProfiles/Login";
 import { Register } from "./UserProfiles/Register";
 import { AddChildView } from "./UserProfiles/AddChildView"
 import { Posts } from "./Posts/PostsParentView"
-import { EditPost } from "./Posts/EditPost"
+import { PostEdit } from "./Posts/EditPost"
 import { PostCreate } from "./Posts/PostCreate"
 import { PostsParentView } from "./Posts/PostsParentView"
 import { PostsChildView } from "./Posts/PostsChildView"
@@ -29,13 +29,10 @@ const ApplicationViews = ({ isLoggedIn }) => {
         </Route>
         <Route path="/addchildview">
           <AddChildView />
+        </Route> 
+        <Route path="/postedit/:postId(\d+)">
+          <PostEdit />
         </Route>
-        {/* <Route path="/editprofile">
-          <EditProfile />
-        </Route>
-        <Route path="/editpost">
-          <EditPost />
-        </Route> */}
         <Route path="/PostsChildView/:childId(\d+)">
           <PostsChildView />
         </Route>
