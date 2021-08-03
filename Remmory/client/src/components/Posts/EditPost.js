@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import * as moment from 'moment';
 
 export const PostEdit = () => {
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState()
     const [isLoading, setIsLoading] = useState(false)
     const [loading, setLoading] = useState(false)
     const [post, setPost] = useState({})
@@ -16,12 +16,16 @@ export const PostEdit = () => {
     const {postId} = useParams();
 
 const getPostToEdit = () => {
-    getPostById(postId).then(post => setPost(post))
+    getPostById(postId).then(post => { setPost(post)
+        setImage(post.mediaUrl)
+    })
 }
 
 useEffect(() => {
     getPostToEdit()
 }, []);
+
+// setImage(post.mediaUrl)
 
 
     const uploadImage = async e => {
@@ -75,7 +79,7 @@ useEffect(() => {
         event.preventDefault();
         history.push(`/`)
     };
-
+    console.log(image)
     return (
         
         <>
@@ -90,7 +94,7 @@ useEffect(() => {
                         {loading ? (
                             <h3>Loading</h3>
                         ): (
-                            <img src={image} style ={{width: '300px' }} />
+                            <img src={image}  style ={{width: '300px' }} />
                         )}
 
                     <label for="title">Title</label>
