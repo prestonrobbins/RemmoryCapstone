@@ -73,7 +73,17 @@ useEffect(() => {
         setIsLoading(true);
         let newPost = { ...post };
         console.log(newPost)
+        if(newPost.title == null){
+            alert("Please give your post a title.")
+        if(newPost.textContent == null){
+            alert("Please give your post a Description.")}
+        if(newPost.mediaUrl == null){
+            alert("Please add a photo to your post.")}
+        if(newPost.dateTimeToPost == null){
+            alert("Please add a photo to your post.")}
+        } else {
         updatePost(newPost).then(() => history.push(`/`))
+        }
     };
 
     const handleClickCancel = (event) => {
