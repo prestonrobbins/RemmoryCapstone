@@ -28,19 +28,19 @@ const ApplicationViews = ({ isLoggedIn }) => {
           <Register />
         </Route>
         <Route path="/addchildview">
-          <AddChildView />
+        {isLoggedIn ? <AddChildView /> : <Redirect to="/login" />}
         </Route> 
         <Route path="/postedit/:postId(\d+)">
-          <PostEdit />
+        {isLoggedIn ? <PostEdit /> : <Redirect to="/login" />}
         </Route>
         <Route path="/PostsChildView/:childId(\d+)">
-          <PostsChildView />
+          {isLoggedIn ? <PostsChildView /> : <Redirect to="/login" />}
         </Route>
         <Route path="/PostsParentView/:parentId(\d+)">
-          <PostsParentView />
+        {isLoggedIn ? <PostsParentView /> : <Redirect to="/login" />}
         </Route>
         <Route path="/postCreate/:childId(\d+)">
-          <PostCreate />
+        {isLoggedIn ? <PostCreate /> : <Redirect to="/login" />}
         </Route>
       </Switch>
     </main>

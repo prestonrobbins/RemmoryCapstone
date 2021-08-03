@@ -6,7 +6,7 @@ import { register } from "../../modules/authManager";
 export const Register = () => {
   const history = useHistory();
 
-  const [DOB, setDOB] = useState();
+  const [dateOfBirth, setDateOfBirth] = useState();
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
@@ -18,29 +18,29 @@ export const Register = () => {
     if (password && password !== confirmPassword) {
       alert("Passwords don't match. Do better.");
     } else {
-      const userProfile = { firstName, lastName, email, DateOfBirth };
+      const userProfile = { firstName, lastName, email, dateOfBirth };
       register(userProfile, password)
         .then(() => history.push("/"));
     }
  };
 
   return (
-    <form onSubmit={registerClick}>
+    <Form onSubmit={registerClick}>
       <fieldset>
-          <label htmlFor="firstName">First Name</label>
-          <input id="firstName" type="text" onChange={e => setFirstName(e.target.value)} />
-          <label htmlFor="lastName">Last Name</label>
-          <input id="lastName" type="text" onChange={e => setLastName(e.target.value)} />
-          <label for="email">Email</label>
-          <input id="email" type="text" onChange={e => setEmail(e.target.value)} />
-          <label for="dateOfBirth">Date Of Birth</label>
-          <input type="date" id="dateOfBirth"  format="YYYY-MM-DD" onChange={e => setDOB(e.target.value)} />
-          <label for="password">Password</label>
-          <input id="password" type="password" onChange={e => setPassword(e.target.value)} />
-          <label for="confirmPassword">Confirm Password</label>
-          <input id="confirmPassword" type="password" onChange={e => setConfirmPassword(e.target.value)} />
-          <button>Register</button>
+          <Label htmlFor="firstName">First Name</Label>
+          <Input id="firstName" type="text" onChange={e => setFirstName(e.target.value)} />
+          <Label htmlFor="lastName">Last Name</Label>
+          <Input id="lastName" type="text" onChange={e => setLastName(e.target.value)} />
+          <Label for="email">Email</Label>
+          <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
+          <Label for="dateOfBirth">Date Of Birth</Label>
+          <Input type="date" id="dateOfBirth"  format="YYYY-MM-DD" onChange={e => setDateOfBirth(e.target.value)} />
+          <Label for="password">Password</Label>
+          <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
+          <Label for="confirmPassword">Confirm Password</Label>
+          <Input id="confirmPassword" type="password" onChange={e => setConfirmPassword(e.target.value)} />
+          <Button>Register</Button>
       </fieldset>
-    </form>
+    </Form>
   );
 }

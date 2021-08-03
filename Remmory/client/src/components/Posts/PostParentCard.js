@@ -11,8 +11,7 @@ export const PostParentCard = ({ post }) => {
             <div>
                 <h3>{post.title}</h3>
                 <p>{post.textContent}</p>
-
-                
+                <img src={post.mediaUrl} style ={{width: '300px' }}></img>
             </div>
 
     )

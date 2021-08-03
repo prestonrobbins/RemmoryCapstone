@@ -3,17 +3,21 @@ import React from "react";
 import { Link, Route } from "react-router-dom";
 import { ChildList } from "./ChildList"
 import { ParentList } from "./ParentList"
+import { logout } from "../../modules/authManager"
 
 // import "bootstrap/dist/css/bootstrap.min.css";
-
-const NavBar = () => {
+ const NavBar = ( {isLoggedIn} ) => {
   return (
     <>
+    {console.log(isLoggedIn)}
+    {isLoggedIn ? 
       <div className="navElement">
         <div id="headerTop">
             <div className = "logo">
             </div>
+            
           <div>
+          
             <div id="appName">Remmory</div>
           </div>
         </div>
@@ -41,18 +45,20 @@ const NavBar = () => {
                   <Link className="nav-link" to="/addchildview">Add Child</Link>
                 </Route>
                 <Route>
-            <Link className="nav-link" onClick={() => { sessionStorage.clear() }} to="/login">Logout</Link>
+            <Link className="nav-link" onClick={() => {logout()}} to="/login">Logout</Link>
           </Route>
-                
-                {/* <Route>
-                <Link className="nav-link" to="/">Shopping</Link>
-              </Route> */}
               </li>
             </ul>
           </div>
         </nav>
       </div>
+: null} 
+{/* {isLoggedIn &&
+  <div>goodbye</div>
+} */}
     </>)
 }
 
 export default NavBar;
+
+
