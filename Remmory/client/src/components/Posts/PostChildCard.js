@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import { deletePost } from "../../modules/PostManager"
 
 export const PostChildCard = ({ post }) => {
     const history = useHistory();
@@ -15,8 +16,8 @@ export const PostChildCard = ({ post }) => {
                 <button>
                 <Link to={`/PostEdit/${post.id}`}>Edit</Link>
                 </button>
-                <button>
-                <Link to={`/PostDelete/${post.id}`}>Delete</Link>
+                <button onClick={() => deletePost(post.id)}>
+                <Link to={`/PostsChildView/${post.id}`}>Delete</Link>
                 </button>
             </div>
 

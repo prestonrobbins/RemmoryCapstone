@@ -89,7 +89,7 @@ export const getPostsByParentChildIdDate = (childId) => {
     })
 }
 
-const updatePost = (id) => {
+export const updatePost = (id) => {
     return getToken().then((token) =>
       fetch(`${_apiUrl}/{id}`, {
         method: "PUT",
