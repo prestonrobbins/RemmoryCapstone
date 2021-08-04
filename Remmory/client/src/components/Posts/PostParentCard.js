@@ -8,11 +8,13 @@ export const PostParentCard = ({ post }) => {
 
     return (
         
-            <div>
-                <h3>{post.title}</h3>
+        <div className="Content">    
+            <img src={post.mediaUrl} className="UserImage"></img>
+            <div className="TextContentHolder">
+                <h3 className="NavHeader">{post.title}</h3>
                 <p>{post.textContent}</p>
-                <img src={post.mediaUrl} style ={{width: '300px' }}></img>
             </div>
+        </div>
 
     )
 }

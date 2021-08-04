@@ -16,17 +16,25 @@ export const PostChildCard = ({ post, getPosts }) => {
 
     return (
         
-            <div>
-                <h3>{post.title}</h3>
-                <p>{post.textContent}</p>
-                <img src={post.mediaUrl} style ={{width: '300px' }}></img>
-                <button>
-                <Link to={`/PostEdit/${post.id}`}>Edit</Link>
-                </button>
-                <button onClick={() => handleDelete(post.id)}>
-                <Link to={`/PostsChildView/${childId}`}>Delete</Link>
-                </button>
-            </div>
+                <div className="Content">
+                <img src={post.mediaUrl} className="UserImage"></img>
+                <div className="TextContentHolder">
+                    <h3>{post.title}</h3>
+                    <p>{post.textContent}</p>
+                    <div className="CardButtonHolder">
+                    <Link to={`/PostEdit/${post.id}`}>
+                        <button>
+                        Edit
+                        </button>
+                    </Link>
+                    <Link to={`/PostsChildView/${childId}`}>
+                        <button onClick={() => handleDelete(post.id)}>
+                        Delete
+                        </button>
+                    </Link>
+                    </div>
+                </div>
+                </div>
 
     )
 }

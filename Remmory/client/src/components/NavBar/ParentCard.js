@@ -8,9 +8,10 @@ const ParentCard = ({ parent }) => {
     return (
         
             <div>
-                <button>
-                <Link to={`/PostsParentView/${parent.id}`}>{parent.firstName}</Link>
+                <Link to={`/PostsParentView/${parent.id}`}>
+                <button className="NavPersonButton">{parent.firstName}
                 </button>
+                </Link>
             </div>
 
     )

@@ -1,0 +1,16 @@
+.Content {
+    display: flex;
+    flex-direction: row;
+    background-color: #7B5733;
+    margin: 5%;
+    padding: 2em;
+}
+
+.TextContentHolder{
+    margin-left: 2em;
+    width: 75%;
+}
+
+.UserImage{
+    width: 300px;
+}
