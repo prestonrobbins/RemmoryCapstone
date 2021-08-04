@@ -4,10 +4,14 @@ import { Link, Route } from "react-router-dom";
 import { ChildList } from "./ChildList"
 import { ParentList } from "./ParentList"
 import { logout } from "../../modules/authManager"
+import { useState } from "react";
 import "./NavBar.css"
 
 // import "bootstrap/dist/css/bootstrap.min.css";
  const NavBar = ( {isLoggedIn} ) => {
+   const [childToggle, setChildToggle] = useState(0)
+
+   
   return (
     <>
     {console.log(isLoggedIn)}
@@ -27,12 +31,13 @@ import "./NavBar.css"
                 <div>
                     <h3 className="NavHeader">Your Children</h3>
                 </div>
-                <ChildList />
+                <ChildList childToggle={childToggle} setChildToggle={setChildToggle}/>
                 <Route>
                   <Link className="nav-link" to="/addchildview">Add Child</Link>
                 </Route>
                 <Route>
-            <Link className="nav-link" onClick={() => {logout()}} to="/login">Logout</Link>
+                <button onClick={() => {logout()}}>logout</button>
+            {/* <Link className="nav-link" onClick={() => {logout()}}>Logout</Link> */}
           </Route>
         </nav>
 : null} 

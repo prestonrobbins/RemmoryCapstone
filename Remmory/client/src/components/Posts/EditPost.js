@@ -113,7 +113,7 @@ useEffect(() => {
                     <label for="textContent">Description</label>
                     <input type="text" id="textContent" placeholder="Description" value={post.textContent} onChange={handleControlledInputChange} />
                     <label for="dateToPost">Post Date</label>
-                    <input type="date" id="dateTimeToPost"  format="YYYY-MM-DD" value={post.dateTimeToPost} onChange={handleControlledInputChange} />
+                    <input type="date" id="dateTimeToPost"  format="YYYY-MM-DD" defaultValue={dateFixer(post.dateTimeToPost)} value={post.dateTimeToPost} onChange={handleControlledInputChange} />
                 <button className="btn btn-primary" onClick={handleClickSavePost}>Save Post</button>
                 <button className="btn btn-primary" onClick={handleClickCancel}>Cancel</button>
             </form>
