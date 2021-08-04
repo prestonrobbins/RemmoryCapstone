@@ -241,13 +241,21 @@ namespace Remmory.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    SELECT DISTINCT up.Id, Up.FireBaseUserId, up.FirstName, up.LastName, 
-                               up.Email, up.DateOfBirth
+                    SELECT DISTINCT up.Id, 
+                                    Up.FireBaseUserId, 
+                                    up.FirstName, 
+                                    up.LastName,                 
+                                    up.Email, 
+                                    up.DateOfBirth
                     From UserProfile up
-                    JOIN ParentChildRelationship pc ON pc.ParentId = up.Id OR pc.ChildId = up.Id
-                    WHERE up.[firstName] LIKE @Criterion AND NOT up.Id = @currentUserId AND up.Id NOT IN (SELECT up.id From UserProfile up
-                    JOIN ParentChildRelationship pc ON pc.ParentId = up.Id OR pc.ChildId = up.Id
-                    WHERE pc.ParentId = @currentUserId OR pc.ChildId = @currentUserId )
+                    LEFT JOIN ParentChildRelationship pc ON pc.ParentId = up.Id 
+                    OR pc.ChildId = up.Id
+                    WHERE up.[firstName] LIKE @Criterion AND NOT up.Id = @currentUserId 
+                    AND (up.Id NOT IN 
+                    (SELECT up.id From UserProfile up
+                    JOIN ParentChildRelationship pc ON pc.ParentId = up.Id 
+                    OR pc.ChildId = up.Id
+                    WHERE pc.ParentId = @currentUserId OR pc.ChildId = @currentUserId ) OR pc.ChildId IS NULL)
                     ORDER BY up.[firstName] DESC";
 
                     DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");

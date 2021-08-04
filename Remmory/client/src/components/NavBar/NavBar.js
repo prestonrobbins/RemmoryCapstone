@@ -19,13 +19,13 @@ import "./NavBar.css"
                   <Link className="nav-link" to="/">Home</Link>
                 </Route>
                 <div>
-                    <h3>Your Parents</h3>
+                    <h3 className="NavHeader">Your Parents</h3>
                 </div>
                 <div>
                 <ParentList />
                 </div>
                 <div>
-                    <h3>Your Children</h3>
+                    <h3 className="NavHeader">Your Children</h3>
                 </div>
                 <ChildList />
                 <Route>

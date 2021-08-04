@@ -20,7 +20,7 @@ export const Register = () => {
     } else {
       const userProfile = { firstName, lastName, email, dateOfBirth };
       register(userProfile, password)
-        .then(() => history.push("/"));
+        .then((res) => history.push("/addchildview"));
     }
  };
 

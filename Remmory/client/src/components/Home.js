@@ -1,14 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 
 export default function Home() {
   return (
-    <span style={{
-      position: "fixed",
-      left: 0,
-      right: 0,
-      top: "50%",
-      marginTop: "-0.5rem",
-      textAlign: "center",
-    }}>hello</span>
+    <>
+      <h2>Welcome "user", start your family tree by adding a child.</h2>
+      <Link to={`/addchildview`}>
+        <button className="HomeAddButton">Add Your Child
+        </button>
+      </Link>
+      {/* <h2>Scroll down to learn more about how Remmory works</h2> */}
+
+    </>
   );
 }
