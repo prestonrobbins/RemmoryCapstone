@@ -7,6 +7,7 @@
     padding-left: 5px;
     border-right: #006E90 2px solid;
     box-shadow: 5px 0px #cacaca;
+    min-width: 200px;
 }
 
 .Logo{
@@ -16,56 +17,146 @@
 
 .NavPersonButton{
     font-family: 'Roboto', sans-serif;
-    background-color: #41BBD9;
+    background-color: #D3F0BC;
+    color: #006E90;
     padding: 12px;
-    margin: 2px;
-    align-self: center;
-    width: 100px;
+    /* margin: 2px; */
+    /* align-self: center; */
+    width: 150px;
     font-size: 15px;
-    border-radius: 3px;
-    box-shadow: 2px 3px#bcd4a7;
-    border: #4e9eb3 1px solid;
+    /* border-radius: 3px; */
+    /* box-shadow: 2px 3px#bcd4a7; */
+    border: none;
+    border-top: #aec999 2px solid;
+    border-bottom: #aec999 2px solid;
+    margin-bottom:-2px;
+    transition:  .4s;
 }
 
 .NavPersonButton:hover{
-
+    font-family: 'Roboto', sans-serif;
+    background-color: #41BBD9;
+    color: white;
+    padding: 15px;
+    /* margin: 2px; */
+    /* align-self: center; */
+    width: 150px;
+    font-size: 15px;
+    /* border-radius: 3px; */
+    /* box-shadow: 2px 3px#bcd4a7; */
+    border: none;
+    border-top: #aec999 2px solid;
+    border-bottom: #aec999 2px solid;
+    margin-bottom:-2px;
+    transition:  .2s;
 }
 
 .LogoutButton{
-    background-color: #B8B8B8;
-    border: none;
+    font-family: 'Roboto', sans-serif;
+    background-color: #D3F0BC;
+    color: #4B5158;
     padding: 12px;
-    padding-left: 10px;
-    margin: 2px;
-    /* margin-left: 10px; */
-    width: 80%;
+    /* margin: 2px; */
+    /* align-self: center; */
+    width: 150px;
     font-size: 15px;
-    /* text-align: left; */
-    border-radius: 2px 10px 10px 2px;
+    /* border-radius: 3px; */
+    /* box-shadow: 2px 3px#bcd4a7; */
+    border: none;
+    border-top: #aec999 2px solid;
+    border-bottom: #aec999 2px solid;
+    margin-bottom:-2px;
+    transition:  .4s;
+}
+
+.LogoutButton:hover{
+    font-family: 'Roboto', sans-serif;
+    background-color: #eb635a;
+    color: white;
+    padding: 15px;
+    /* margin: 2px; */
+    /* align-self: center; */
+    width: 150px;
+    font-size: 15px;
+    /* border-radius: 3px; */
+    /* box-shadow: 2px 3px#bcd4a7; */
+    border: none;
+    border-top: #aec999 2px solid;
+    border-bottom: #aec999 2px solid;
+    margin-bottom:-2px;
+    transition:  .2s;
 }
 
 .AddChildButton{
-    background-color: #41BBD9;
-    border: none;
+    font-family: 'Roboto', sans-serif;
+    background-color: #D3F0BC;
+    color: #4B5158;
     padding: 12px;
-    padding-left: 10px;
-    margin: 2px;
-    width: 80%;
+    /* margin: 2px; */
+    /* align-self: center; */
+    width: 150px;
     font-size: 15px;
-    /* text-align: left; */
-    border-radius: 2px 10px 10px 2px;
+    /* border-radius: 3px; */
+    /* box-shadow: 2px 3px#bcd4a7; */
+    border: none;
+    border-top: #aec999 2px solid;
+    border-bottom: #aec999 2px solid;
+    margin-bottom:-2px;
+    transition:  .4s;    
+}
+
+.AddChildButton:hover{
+    font-family: 'Roboto', sans-serif;
+    background-color: #41BBD9;
+    color: white;
+    padding: 15px;
+    /* margin: 2px; */
+    /* align-self: center; */
+    width: 150px;
+    font-size: 15px;
+    /* border-radius: 3px; */
+    /* box-shadow: 2px 3px#bcd4a7; */
+    border: none;
+    border-top: #aec999 2px solid;
+    border-bottom: #aec999 2px solid;
+    margin-bottom:-2px;
+    transition:  .2s;
 }
 
 .HomeButton{
-    background-color: #B8B8B8;
-    border: none;
+    font-family: 'Roboto', sans-serif;
+    background-color: #D3F0BC;
+    color: #006E90;
     padding: 12px;
-    padding-left: 10px;
-    margin: 2px;
-    width: 80%;
+    /* margin: 2px; */
+    /* align-self: center; */
+    width: 150px;
     font-size: 15px;
-    /* text-align: left; */
-    border-radius: 2px 10px 10px 2px;
+    /* border-radius: 3px; */
+    /* box-shadow: 2px 3px#bcd4a7; */
+    border: none;
+    border-top: #aec999 2px solid;
+    border-bottom: #aec999 2px solid;
+    margin-bottom:-2px;
+    transition:  .4s;
+}
+
+.HomeButton:hover{
+    font-family: 'Roboto', sans-serif;
+    background-color: #41BBD9;
+    color: white;
+    padding: 15px;
+    /* margin: 2px; */
+    /* align-self: center; */
+    width: 150px;
+    font-size: 15px;
+    /* border-radius: 3px; */
+    /* box-shadow: 2px 3px#bcd4a7; */
+    border: none;
+    border-top: #aec999 2px solid;
+    border-bottom: #aec999 2px solid;
+    margin-bottom:-2px;
+    transition:  .2s;
 }
 
 .NavButtonsAlign{
@@ -74,11 +165,12 @@
 }
 .NavHeader{
     color:#006E90;
+    margin-top: 30px;
 }
 
-
-
-
+/* .ActiveLink{
+    color:red;
+} */
 
 
 

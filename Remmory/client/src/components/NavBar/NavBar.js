@@ -1,6 +1,6 @@
 import React from "react";
 // import "./NavBar.css";
-import { Link, Route } from "react-router-dom";
+import { Link, Route, NavLink } from "react-router-dom";
 import { ChildList } from "./ChildList"
 import { ParentList } from "./ParentList"
 import { logout } from "../../modules/authManager"
@@ -19,8 +19,16 @@ import RemmoryLogo from "../../images/RemmoryLogo.png"
     {isLoggedIn ? 
             <nav className="navbar">
             <img src={RemmoryLogo} alt="Remmory Logo" className=""></img>
-
-                  <Link className="nav-link" to="/"><button className="HomeButton">Home</button></Link>
+            <div className="NavButtonsAlign">
+                  <Link className="nav-link" to="/">
+                    <button className="HomeButton">Home</button>
+                    </Link>
+                    </div>
+                    <div className="NavButtonsAlign">
+                    <Route>
+                      <button onClick={() => {logout()}} className="LogoutButton">logout</button>
+                    </Route>
+                    </div>
                 <div className="NavButtonsAlign">
                     <h2 className="NavHeader">Your Parents</h2>
                 </div>
@@ -31,15 +39,14 @@ import RemmoryLogo from "../../images/RemmoryLogo.png"
                     <h2 className="NavHeader">Your Children</h2>
                 </div>
                 <ChildList childToggle={childToggle} setChildToggle={setChildToggle}/>
+                <div className="NavButtonsAlign">
+
                 <Route>
                   <Link className="nav-link" to="/addchildview">
                     <button className="AddChildButton">Add Child</button>
                   </Link>
                 </Route>
-                <Route>
-                <button onClick={() => {logout()}} className="LogoutButton">logout</button>
-            {/* <Link className="nav-link" onClick={() => {logout()}}>Logout</Link> */}
-          </Route>
+                </div>
         </nav>
 : null} 
 {/* {isLoggedIn &&
