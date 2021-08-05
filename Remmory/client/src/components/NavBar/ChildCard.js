@@ -8,7 +8,7 @@ export const ChildCard = ({ child }) => {
 
     return (
         
-            <div>
+            <div className="NavButtonsAlign">
                 <Link to={`/PostsChildView/${child.id}`}>
                 <button className="NavPersonButton">{child.firstName}
                 </button>

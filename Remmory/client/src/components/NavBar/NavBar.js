@@ -6,6 +6,7 @@ import { ParentList } from "./ParentList"
 import { logout } from "../../modules/authManager"
 import { useState } from "react";
 import "./NavBar.css"
+import RemmoryLogo from "../../images/RemmoryLogo.png"
 
 // import "bootstrap/dist/css/bootstrap.min.css";
  const NavBar = ( {isLoggedIn} ) => {
@@ -17,26 +18,26 @@ import "./NavBar.css"
     {console.log(isLoggedIn)}
     {isLoggedIn ? 
             <nav className="navbar">
-            <div id="appName">Remmory</div>
-              
-                <Route>
-                  <Link className="nav-link" to="/">Home</Link>
-                </Route>
-                <div>
-                    <h3 className="NavHeader">Your Parents</h3>
+            <img src={RemmoryLogo} alt="Remmory Logo" className=""></img>
+
+                  <Link className="nav-link" to="/"><button className="HomeButton">Home</button></Link>
+                <div className="NavButtonsAlign">
+                    <h2 className="NavHeader">Your Parents</h2>
                 </div>
                 <div>
                 <ParentList />
                 </div>
-                <div>
-                    <h3 className="NavHeader">Your Children</h3>
+                <div className="NavButtonsAlign">
+                    <h2 className="NavHeader">Your Children</h2>
                 </div>
                 <ChildList childToggle={childToggle} setChildToggle={setChildToggle}/>
                 <Route>
-                  <Link className="nav-link" to="/addchildview">Add Child</Link>
+                  <Link className="nav-link" to="/addchildview">
+                    <button className="AddChildButton">Add Child</button>
+                  </Link>
                 </Route>
                 <Route>
-                <button onClick={() => {logout()}}>logout</button>
+                <button onClick={() => {logout()}} className="LogoutButton">logout</button>
             {/* <Link className="nav-link" onClick={() => {logout()}}>Logout</Link> */}
           </Route>
         </nav>

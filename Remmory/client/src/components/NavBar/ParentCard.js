@@ -7,7 +7,7 @@ const ParentCard = ({ parent }) => {
 
     return (
         
-            <div>
+            <div className="NavButtonsAlign">
                 <Link to={`/PostsParentView/${parent.id}`}>
                 <button className="NavPersonButton">{parent.firstName}
                 </button>
