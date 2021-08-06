@@ -40,14 +40,16 @@ export const PostChildList = () => {
         <div className="ViewHolder">
         <div className="userTopHolder">
             <h2 className="UserInfoTop">Your Parent: {user.firstName} {user.lastName}</h2> 
-            <h2 className="UserInfoTop"> Birthday: {user.dateOfBirth}</h2>
+            
+            
+                <h2 className="UserInfoTop"> Birthday: {user.dateOfBirth}</h2>
+                <Link to={`/postCreate/${childId}`}>
             <button className="CreateNewPostButton">
                 Create New Post
             </button>
+            </Link>
         </div>
-        <Link to={`/postCreate/${childId}`}>
-            
-        </Link>
+
             {console.log(posts)}
         <div className="ScrollView">
             {posts.map((post) => {
