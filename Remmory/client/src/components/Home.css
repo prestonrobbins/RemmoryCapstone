@@ -4,8 +4,7 @@
     text-align: center;
     padding: 50px;
     border-radius: 10px;
-    box-shadow: 2px 3px #c5c4c0; 
-
+    box-shadow: 2px 3px #c5c4c0
 }
 
 .HomeHolderHolder{
@@ -14,7 +13,8 @@
     /* width: 80%; */
     position: fixed;
     padding-top: 15%;
-    padding-left:17%; 
+    padding-left:17%;
+    background-color: #EBF2FA;
 }
 
 .HomeHeader{
