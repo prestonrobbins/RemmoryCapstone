@@ -9,11 +9,12 @@ export const AddChildCard = ({ child, CreatePCR  }) => {
 
     return (
         
-            <div>
-                <h4>{`${child.firstName} ${child.lastName}`}</h4>
-                <button onClick={() => CreatePCR({childId: child.id})}>
-                    <Link to={`/PostsChildView/${child.id}`}>Add Child</Link>
-                </button>
+            <div className="ChildCardHolder">
+                <h4 className="AddChildCardName">{`${child.firstName} ${child.lastName}`}</h4>
+                
+                    <Link to={`/PostsChildView/${child.id}`}>
+                    <button className="AddChildCardButton" onClick={() => CreatePCR({childId: child.id})}>Add Child</button>
+                    </Link>
             </div>
 
     )

@@ -2,14 +2,12 @@
     display: flex;
     flex-direction: row;
     background-image: linear-gradient( #D3F0BC, #bee0a0);
-
     margin: 5%;
     padding: 2em;
     width: 800px;
     border-radius: 10px;
     box-shadow: 2px 3px #c5c4c0;
     transition: 1s;
-
 }
 
 .Content:hover {
@@ -44,7 +42,74 @@
 }
 
 .UserInfoTop{
-    color: white;
+    color: #006E90;
     margin-left: 5em;
 }
 
+.CardButton{
+    border:none;
+    background-color: #41BBD9;
+    border-radius: 3px;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right:8px;
+    margin: 3px;
+    font-size: 18px;
+    box-shadow: 2px 3px #a3b990;
+    transition: .2s;
+}
+
+.CardButton:hover{
+    border: none;
+    background-color: #37a3be;
+    border-radius: 3px;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 3px;
+    font-size: 18px;
+    box-shadow: 1px 2px #a3b990;
+    transition: .4s
+}
+
+.CreateNewPostButton{
+    border:none;
+    background-color: #41BBD9;
+    border-radius: 3px;
+    padding: 10px;
+    padding-left: 18px;
+    padding-right:18px;
+    margin: 3px;
+    font-size: 18px;
+    box-shadow: 2px 3px #86d2e5;
+    transition: .2s;
+}
+
+.CreateNewPostButton:hover{
+    border:none;
+    background-color: #37a3be;
+    border-radius: 3px;
+    padding: 10px;
+    padding-left: 18px;
+    padding-right:18px;
+    margin: 3px;
+    font-size: 18px;
+    box-shadow: 1px 2px #86d2e5;
+    transition: .4s;
+}
+
+.DateFlexBox{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+}
+
+.DateName{
+padding-right: 30px;
+}
+
+.ScrollView{
+height: 700px;
+overflow: scroll;
+width: 1500px;
+}

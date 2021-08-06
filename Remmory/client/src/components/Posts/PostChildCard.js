@@ -39,18 +39,20 @@ export const PostChildCard = ({ post, getPosts }) => {
                 <div className="Content">
                 <img src={post.mediaUrl} className="UserImage"></img>
                 <div className="TextContentHolder">
-                    <h3>{post.title}</h3>
+                    <div className="DateFlexBox">
+                <h4 className="DateName">Date Created: {post.dateTimeCreated}</h4>
+                    <h4>Date To Send: {post.dateTimeToPost}</h4>
+                    </div>
+                    <h2>{post.title}</h2>
                     <p>{post.textContent}</p>
-                    <p>Date Created: {post.dateTimeCreated}</p>
-                    <p>Date Sent: {post.dateTimeToPost}</p>
                     <div className="CardButtonHolder">
                     <Link to={`/PostEdit/${post.id}`}>
-                        <button>
+                        <button className="CardButton">
                         Edit
                         </button>
                     </Link>
                     <Link to={`/PostsChildView/${childId}`}>
-                        <button onClick={() => handleDelete(post.id)}>
+                        <button className="CardButton" onClick={() => handleDelete(post.id)}>
                         Delete
                         </button>
                     </Link>

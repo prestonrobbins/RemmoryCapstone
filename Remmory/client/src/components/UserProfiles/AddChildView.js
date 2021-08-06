@@ -47,6 +47,7 @@ import { SearchForUsersByName, getAllUsers } from '../../modules/UserProfileMana
 import { CreatePCR } from "../../modules/ParentChildRelManager"
 import { Link, useHistory } from "react-router-dom";
 import { AddChildCard } from "./AddChildCard"
+import './AddChild.css'
 
 export const AddChildView = () => {
 
@@ -83,7 +84,7 @@ export const AddChildView = () => {
 
     return (
         <>
-            <div className='container'>
+            <div className="AddChildCardsContainerHolder">
                 <div>
                     <h4>Search For Your Child</h4>
                 </div>
@@ -95,8 +96,8 @@ export const AddChildView = () => {
 
                 </div>
             </div>
-            <div className="container">
-                <div>
+            <div>
+                <div className="AddChildCardsContainer">
                     {children.map((child) => (
                         <AddChildCard child={child} key={child.id} CreatePCR={CreatePCR} />
                     ))}

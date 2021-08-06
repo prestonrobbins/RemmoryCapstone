@@ -38,7 +38,7 @@ export const PostParentList = () => {
         <div className="ViewHolder">
         <div className="userTopHolder">
             <h2 className="UserInfoTop">Your Parent: {user.firstName} {user.lastName}</h2> 
-            <h2 className="UserInfoTop">{user.firstName}s Birthday: {user.dateOfBirth}</h2>
+            <h2 className="UserInfoTop">Birthday: {user.dateOfBirth}</h2>
             </div>
             {posts.map((post) => {
                 console.log(post)

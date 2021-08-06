@@ -88,7 +88,7 @@ useEffect(() => {
 
     const handleClickCancel = (event) => {
         event.preventDefault();
-        history.push(`/`)
+        history.push(`PostsChildView/{}`)
     };
     console.log(image)
     return (

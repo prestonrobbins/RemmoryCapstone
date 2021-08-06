@@ -1,0 +1,46 @@
+.AddChildCardButton{
+    border:none;
+    background-color: #41BBD9;
+    border-radius: 3px;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right:8px;
+    margin: 3px;
+    font-size: 18px;
+    box-shadow: 2px 3px #b4cf9e;
+    transition: .2s;
+}
+
+.AddChildCardButton:hover{
+    border: none;
+    background-color: #37a3be;
+    border-radius: 3px;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 3px;
+    font-size: 18px;
+    box-shadow: 1px 2px #b4cf9e;
+    transition: .4s
+}
+
+.AddChildCardName{
+
+}
+
+.ChildCardHolder{
+    background-color: #D3F0BC;
+    margin: 20px;
+    padding: 1px 0px 10px 10px;
+    border-radius: 10px;
+    box-shadow: 2px 3px #a1c8d1;
+}
+
+.AddChildCardsContainer{
+    overflow: scroll;
+    height: 700px;
+}
+
+.AddChildCardsContainerHolder{
+    padding: 50px;
+}
