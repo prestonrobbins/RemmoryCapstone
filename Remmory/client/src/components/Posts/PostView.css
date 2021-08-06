@@ -1,9 +1,28 @@
 .Content {
     display: flex;
     flex-direction: row;
-    background-color: #D3F0BC;
+    background-image: linear-gradient( #D3F0BC, #bee0a0);
+
     margin: 5%;
     padding: 2em;
+    width: 800px;
+    border-radius: 10px;
+    box-shadow: 2px 3px #c5c4c0;
+    transition: 1s;
+
+}
+
+.Content:hover {
+    display: flex;
+    flex-direction: row;
+    background-color: #D3F0BC;
+    margin: 5%;
+    margin-left: 3%;
+    padding: 2em;
+    width: 815px;
+    border-radius: 15px;
+    box-shadow: 2px 3px #c5c4c0;
+    transition: .5s;
 }
 
 .TextContentHolder{
@@ -14,3 +33,18 @@
 .UserImage{
     width: 300px;
 }
+
+.userTopHolder{
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient( #71BE1F, #83db24);
+    width: 1000%;
+    justify-content: space-around;
+    box-shadow: 2px 3px #c5c4c0; 
+}
+
+.UserInfoTop{
+    color: white;
+    margin-left: 5em;
+}
+
