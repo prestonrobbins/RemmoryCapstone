@@ -4,6 +4,7 @@ import { CreatePost } from '../../modules/PostManager';
 import { getPCRByCurrentAndChildId } from '../../modules/ParentChildRelManager'
 import { useParams } from "react-router-dom";
 import * as moment from 'moment';
+import './PostForm.css'
 
 export const PostCreate = () => {
     const [image, setImage] = useState('')
@@ -127,6 +128,7 @@ const {childId} = useParams();
 
                     <h1>Upload Images</h1>
                         <input 
+                        className="FormFileButton"
                         type="file"
                         name="file" 
                         placeholder="Upload an Image"
@@ -138,14 +140,14 @@ const {childId} = useParams();
                             <img src={image} style ={{width: '300px' }} />
                         )}
 
-                    <label for="title">Title</label>
-                    <input type="text" id="title" placeholder="Title" value={post.title} onChange={handleControlledInputChange} />
-                    <label for="textContent">Description</label>
-                    <input type="text" id="textContent" placeholder="Description" value={post.textContent} onChange={handleControlledInputChange} />
-                    <label for="dateToPost">Post Date</label>
+                    <label className="Label" for="title">Title</label>
+                    <input type="text" id="title"  value={post.title} onChange={handleControlledInputChange} />
+                    <label className="Label" for="textContent">Description</label>
+                    <input className="Description"type="text" id="textContent" value={post.textContent} onChange={handleControlledInputChange} />
+                    <label  className="Label" for="dateToPost">Post Date</label>
                     <input type="date" id="dateTimeToPost"  format="YYYY-MM-DD" value={post.dateTimeToPost} onChange={handleControlledInputChange} />
-                <button className="btn btn-primary" onClick={handleClickSavePost}>Save Post</button>
-                <button className="btn btn-primary" onClick={handleClickCancel}>Cancel</button>
+                <button className="FormSubmitButton" onClick={handleClickSavePost}>Save Post</button>
+                <button className="FormCancelButton" onClick={handleClickCancel}>Cancel</button>
             </form>
         </>
     )

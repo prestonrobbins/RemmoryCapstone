@@ -35,7 +35,7 @@
 .userTopHolder{
     display: flex;
     flex-direction: column;
-    background-image: linear-gradient( #71BE1F, #83db24);
+    background-image: linear-gradient( #D3F0BC, #c0dbab);
     width: 1000%;
     justify-content: space-around;
     box-shadow: 2px 3px #c5c4c0; 
@@ -79,10 +79,12 @@
     padding: 10px;
     padding-left: 18px;
     padding-right:18px;
-    margin: 3px;
+    margin-bottom: 30px;
+    margin-left: 120px;
     font-size: 18px;
     box-shadow: 2px 3px #86d2e5;
     transition: .2s;
+    width: 200px;
 }
 
 .CreateNewPostButton:hover{
@@ -92,7 +94,8 @@
     padding: 10px;
     padding-left: 18px;
     padding-right:18px;
-    margin: 3px;
+    margin-bottom: 30px;
+    margin-left: 120px;
     font-size: 18px;
     box-shadow: 1px 2px #86d2e5;
     transition: .4s;

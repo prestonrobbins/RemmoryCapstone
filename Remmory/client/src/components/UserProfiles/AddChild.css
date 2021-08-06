@@ -44,3 +44,29 @@
 .AddChildCardsContainerHolder{
     padding: 50px;
 }
+
+.BUTTON{
+    border:none;
+    background-color: #41BBD9;
+    border-radius: 3px;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right:8px;
+    margin: 3px;
+    font-size: 18px;
+    box-shadow: 2px 3px #a3b990;
+    transition: .2s;
+}
+
+.BUTTON:hover{
+    border: none;
+    background-color: #37a3be;
+    border-radius: 3px;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 3px;
+    font-size: 18px;
+    box-shadow: 1px 2px #a3b990;
+    transition: .4s
+}

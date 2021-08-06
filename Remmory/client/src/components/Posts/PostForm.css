@@ -1,0 +1,72 @@
+Form{
+    height: 900px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+}
+
+.Label{
+    margin-top: 10px;
+}
+
+.Description{
+    height: 100px;
+}
+
+.FormFileButton{
+
+}
+
+
+
+.FormSubmitButton{
+    border:none;
+    background-color: #41BBD9;
+    border-radius: 3px;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right:8px;
+    margin: 3px;
+    font-size: 18px;
+    box-shadow: 2px 3px #a8dbe7;
+    transition: .2s;
+}
+
+.FormSubmitButton:hover{
+    border: none;
+    background-color: #37a3be;
+    border-radius: 3px;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 3px;
+    font-size: 18px;
+    box-shadow: 1px 2px #a8dbe7;
+    transition: .4s
+}
+
+.FormCancelButton{
+    border:none;
+    background-color: #41BBD9;
+    border-radius: 3px;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right:8px;
+    margin: 3px;
+    font-size: 18px;
+    box-shadow: 2px 3px #a8dbe7;
+    transition: .2s;
+}
+
+.FormCancelButton:hover{
+    border: none;
+    background-color: #eb635a;
+    border-radius: 3px;
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 3px;
+    font-size: 18px;
+    box-shadow: 1px 2px #a8dbe7;
+    transition: .4s
+}
